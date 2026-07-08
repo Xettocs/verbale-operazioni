@@ -420,7 +420,7 @@
 
   <div id="resultPanel">
     <h3>Verbale generato</h3>
-    <p id="resultInfo">Il PDF è pronto. Puoi salvarlo sul dispositivo o condividerlo via e-mail / WhatsApp.</p>
+    <p id="resultInfo">Il PDF è pronto ed è protetto da modifica/copia (pagine convertite in immagine). Puoi salvarlo sul dispositivo o condividerlo via e-mail / WhatsApp.</p>
     <div class="result-actions">
       <button class="btn btn-ghost" id="previewBtn">Anteprima</button>
       <button class="btn btn-ghost" id="saveBtn">Salva sul dispositivo</button>
@@ -454,8 +454,13 @@
         <input class="mono" id="f_ore" type="time" data-required>
       </div>
       <div class="field">
-        <label class="flabel" for="f_ormeggio">In acque di / punto di ormeggio<span class="req">*</span></label>
-        <input id="f_ormeggio" type="text" placeholder="es. antistanti il lido Brigantino; nr. 3 del porticciolo di…" data-required>
+        <label class="flabel">Riferimento del controllo<span class="req">*</span></label>
+        <div class="toggle-group" id="ormeggioTipoGroup" style="margin-bottom:10px;">
+          <label class="toggle-opt active" data-val="antistanti"><input type="radio" name="ormeggioTipo" value="antistanti" checked>Nelle acque di / antistanti</label>
+          <label class="toggle-opt" data-val="ormeggio"><input type="radio" name="ormeggioTipo" value="ormeggio">Nel punto di ormeggio</label>
+        </div>
+        <label class="flabel" for="f_ormeggio" id="ormeggioLabel">Luogo (nelle acque di / antistanti)<span class="req">*</span></label>
+        <input id="f_ormeggio" type="text" placeholder="es. il lido Brigantino" data-required>
       </div>
       <div class="row2">
         <div class="field">
@@ -515,7 +520,7 @@
           </div>
           <div class="field">
             <label class="flabel">Categoria<span class="req">*</span></label>
-            <input type="text" class="v-cat" placeholder="es. APG, UPG" data-required>
+            <input type="text" class="v-cat" data-required>
           </div>
         </div>
         <div class="row2">
@@ -589,6 +594,14 @@
         <div class="field">
           <label class="flabel" for="f_matricolaMotore">Matricola motore/i <span class="opt">(uno o più, separati da virgola)</span><span class="req">*</span></label>
           <input class="mono" id="f_matricolaMotore" type="text" placeholder="es. AB12345, AB12346" data-required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="flabel">Destinazione d'uso<span class="req">*</span></label>
+        <div class="toggle-group" id="usoGroup">
+          <label class="toggle-opt" data-val="Unità da diporto puro"><input type="radio" name="uso" value="Unità da diporto puro">Unità da diporto puro</label>
+          <label class="toggle-opt" data-val="Unità in locazione/noleggio"><input type="radio" name="uso" value="Unità in locazione/noleggio">Unità in locazione/noleggio</label>
         </div>
       </div>
     </div>
@@ -1198,6 +1211,7 @@ wireToggleGroup('tipoUnitaGroup', function(val){
     setRequiredEnabled(nat, true);
   }
 });
+wireToggleGroup('usoGroup', function(){ updateProgress(); });
 /* ---------------- Auto-formattazione coordinate (Lat/Long) ---------------- */
 function wireCoordField(inputId, degreeDigits){
   var el = document.getElementById(inputId);
@@ -1221,6 +1235,36 @@ function wireCoordField(inputId, degreeDigits){
 }
 wireCoordField('f_lat', 2);
 wireCoordField('f_long', 3);
+
+/* ---------------- Auto-compilazione giorno/mese/ora correnti ---------------- */
+(function prefillDateTime(){
+  var mesi = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
+  var now = new Date();
+  document.getElementById('f_giorno').value = now.getDate();
+  document.getElementById('f_mese').value = mesi[now.getMonth()];
+  var hh = String(now.getHours()).padStart(2,'0');
+  var mm = String(now.getMinutes()).padStart(2,'0');
+  document.getElementById('f_ore').value = hh + ':' + mm;
+})();
+
+/* ---------------- Riferimento del controllo: antistanti / punto di ormeggio ---------------- */
+var ormeggioLabel = document.getElementById('ormeggioLabel');
+var ormeggioInput = document.getElementById('f_ormeggio');
+document.querySelectorAll('#ormeggioTipoGroup .toggle-opt').forEach(function(opt){
+  opt.addEventListener('click', function(){
+    document.querySelectorAll('#ormeggioTipoGroup .toggle-opt').forEach(function(o){ o.classList.remove('active'); });
+    opt.classList.add('active');
+    opt.querySelector('input').checked = true;
+    if(opt.dataset.val === 'antistanti'){
+      ormeggioLabel.innerHTML = 'Luogo (nelle acque di / antistanti)<span class="req">*</span>';
+      ormeggioInput.placeholder = 'es. il lido Brigantino';
+    } else {
+      ormeggioLabel.innerHTML = 'Luogo (punto di ormeggio)<span class="req">*</span>';
+      ormeggioInput.placeholder = 'es. nr. 3 del porticciolo di…';
+    }
+  });
+});
+
 
 function setRequiredEnabled(container, enabled){
   container.querySelectorAll('[data-required]').forEach(function(el){
@@ -1388,7 +1432,7 @@ function fieldFilled(el){
 }
 function updateProgress(){
   var fields = activeRequiredFields();
-  var total = fields.length + 2; // +1 firma primo verbalizzante, +1 firma della parte (sempre richieste)
+  var total = fields.length + 4; // +1 firma primo verbalizzante, +1 firma della parte, +1 tipo unità, +1 destinazione d'uso
   var verb2Visible = !verb2Card.classList.contains('hidden');
   if(verb2Visible) total += 1; // second signature required too
 
@@ -1396,6 +1440,8 @@ function updateProgress(){
   if(sigPads[1] && sigPads[1].hasInk) filled += 1;
   if(sigPads[3] && sigPads[3].hasInk) filled += 1;
   if(verb2Visible && sigPads[2] && sigPads[2].hasInk) filled += 1;
+  if(document.querySelector('input[name=tipoUnita]:checked')) filled += 1;
+  if(document.querySelector('input[name=uso]:checked')) filled += 1;
 
   var comando = document.getElementById('f_comando');
   // comando counted separately since it's outside main
@@ -1467,11 +1513,21 @@ function validateAll(){
   var verb2Visible = !verb2Card.classList.contains('hidden');
   var sig2Missing = verb2Visible && !sigPads[2].hasInk;
   var sig3Missing = !sigPads[3].hasInk;
+  var tipoUnitaMissing = !document.querySelector('input[name=tipoUnita]:checked');
+  var usoMissing = !document.querySelector('input[name=uso]:checked');
 
   if(invalidEls.length){
     invalidEls[0].scrollIntoView({behavior:'smooth', block:'center'});
     invalidEls[0].focus();
     return 'Compila tutti i campi obbligatori evidenziati in rosso.';
+  }
+  if(tipoUnitaMissing){
+    document.getElementById('tipoUnitaGroup').scrollIntoView({behavior:'smooth', block:'center'});
+    return 'Seleziona il tipo di unità (Imbarcazione o Natante).';
+  }
+  if(usoMissing){
+    document.getElementById('usoGroup').scrollIntoView({behavior:'smooth', block:'center'});
+    return 'Seleziona la destinazione d\'uso.';
   }
   if(sigMissing){
     document.getElementById('sigCanvas1').scrollIntoView({behavior:'smooth', block:'center'});
@@ -1488,146 +1544,261 @@ function validateAll(){
   return null;
 }
 
-function buildPdf(){
-  var jsPDF = window.jspdf.jsPDF;
-  var doc = new jsPDF({ unit: 'mm', format: 'a4' });
-  var pageW = 210, marginL = 20, marginR = 20, usableW = pageW - marginL - marginR;
-  var y = 20;
+async function buildPdf(){
+  var DPI = 190;
+  var MM2PX = DPI / 25.4;
+  var PT2PX = DPI / 72;
+  var PAGE_W_MM = 210, PAGE_H_MM = 297;
+  var PAGE_W = Math.round(PAGE_W_MM * MM2PX);
+  var PAGE_H = Math.round(PAGE_H_MM * MM2PX);
+  var marginL = 20 * MM2PX, marginR = 20 * MM2PX, usableW = PAGE_W - marginL - marginR;
+  var pageBottom = 282 * MM2PX;
+  var FONT = 'Helvetica, Arial, sans-serif';
 
-  function ensureSpace(h){
-    if(y + h > 280){ doc.addPage(); y = 20; }
+  var pages = [];
+  var ctx, y;
+  function newPage(){
+    var c = document.createElement('canvas');
+    c.width = PAGE_W; c.height = PAGE_H;
+    var cx = c.getContext('2d');
+    cx.fillStyle = '#ffffff';
+    cx.fillRect(0, 0, PAGE_W, PAGE_H);
+    cx.fillStyle = '#141414';
+    cx.textBaseline = 'alphabetic';
+    pages.push(c);
+    ctx = cx;
+    y = 18 * MM2PX;
   }
-  function heading(text, size, gap){
-    ensureSpace(10);
-    doc.setFont('helvetica','bold'); doc.setFontSize(size);
-    doc.text(text, pageW/2, y, {align:'center'});
-    y += gap;
+  newPage();
+
+  function ensureSpace(hPx){ if(y + hPx > pageBottom){ newPage(); } }
+  function setFont(sizePt, bold){
+    ctx.font = (bold ? 'bold ' : '') + (sizePt * PT2PX).toFixed(2) + 'px ' + FONT;
   }
-  function para(text, opts){
+  function heading(text, sizePt, gapMm){
+    ensureSpace(9 * MM2PX);
+    setFont(sizePt, true);
+    var w = ctx.measureText(text).width;
+    ctx.fillText(text, (PAGE_W - w) / 2, y);
+    y += gapMm * MM2PX;
+  }
+  function centeredLine(text, sizePt, bold, gapMm){
+    ensureSpace(7 * MM2PX);
+    setFont(sizePt, bold);
+    var w = ctx.measureText(text).width;
+    ctx.fillText(text, (PAGE_W - w) / 2, y);
+    y += (gapMm !== undefined ? gapMm : 5) * MM2PX;
+  }
+  function N(v){ return { text: String(v), bold:false }; }
+  function B(v){ return { text: String(v), bold:true }; }
+  function para(text, opts){ richPara([N(text)], opts); }
+  function richPara(segs, opts){
     opts = opts || {};
-    doc.setFont('helvetica', opts.bold ? 'bold' : 'normal');
-    doc.setFontSize(opts.size || 10.5);
-    var lines = doc.splitTextToSize(text, usableW);
-    lines.forEach(function(line){
-      ensureSpace(6);
-      doc.text(line, marginL, y);
-      y += 5.2;
+    var sizePt = opts.size || 10.5;
+    var lineHeight = (opts.lineHeight || 4.9) * MM2PX;
+    var words = [];
+    segs.forEach(function(seg){
+      seg.text.split(/\s+/).filter(function(w){ return w.length > 0; }).forEach(function(p){
+        words.push({ text:p, bold:seg.bold });
+      });
     });
-    y += opts.gapAfter || 2;
+    setFont(sizePt, false);
+    var spaceW = ctx.measureText(' ').width;
+    var line = [], lineWidth = 0;
+    function flush(){
+      if(!line.length) return;
+      ensureSpace(lineHeight + 1);
+      var x = marginL;
+      line.forEach(function(w){
+        setFont(sizePt, w.bold);
+        ctx.fillText(w.text, x, y);
+        x += ctx.measureText(w.text).width + spaceW;
+      });
+      y += lineHeight;
+      line = []; lineWidth = 0;
+    }
+    words.forEach(function(w){
+      setFont(sizePt, w.bold);
+      var ww = ctx.measureText(w.text).width;
+      if(lineWidth + ww > usableW && line.length){ flush(); }
+      line.push(w);
+      lineWidth += ww + spaceW;
+    });
+    flush();
+    y += (opts.gapAfter !== undefined ? opts.gapAfter : 1.6) * MM2PX;
   }
+
+  var logoImg = await new Promise(function(resolve){
+    var img = new Image();
+    img.onload = function(){ resolve(img); };
+    img.onerror = function(){ resolve(null); };
+    img.src = LOGO_BASE64;
+  });
 
   var comando = val('f_comando');
-  try{
-    var logoSize = 18;
-    doc.addImage(LOGO_BASE64, 'PNG', pageW/2 - logoSize/2, y - 8, logoSize, logoSize);
-    y += logoSize - 6;
-  }catch(e){ /* logo non disponibile, si prosegue senza */ }
-  heading('Capitaneria di Porto – Guardia Costiera', 12, 6);
-  heading(comando, 11, 8);
-  para("ACCERTAMENTO PREVENTIVO DELLE CONDIZIONI DI SICUREZZA DI UNITÀ DA DIPORTO", {bold:true, size:10, gapAfter:0});
-  para("(art. 26-bis, comma 2, del D.Lgs. 18 luglio 2005, n. 171)", {size:9, gapAfter:4});
-  heading('VERBALE DELLE OPERAZIONI COMPIUTE', 13, 10);
+  if(logoImg){
+    var logoSize = 16 * MM2PX;
+    ctx.drawImage(logoImg, PAGE_W/2 - logoSize/2, y - 6*MM2PX, logoSize, logoSize);
+    y += logoSize - 5*MM2PX;
+  }
+  heading('Capitaneria di Porto – Guardia Costiera', 12, 5.5);
+  heading(comando, 11, 7);
+  centeredLine("ACCERTAMENTO PREVENTIVO DELLE CONDIZIONI DI SICUREZZA DI UNITÀ DA DIPORTO", 9.5, true, 4.4);
+  centeredLine("(art. 26-bis, comma 2, del D.Lgs. 18 luglio 2005, n. 171)", 9, false, 4.5);
+  heading('VERBALE DELLE OPERAZIONI COMPIUTE', 12.5, 8);
 
   var giorno = val('f_giorno'), mese = val('f_mese'), ore = val('f_ore');
   var ormeggio = val('f_ormeggio');
+  var ormeggioTipo = document.querySelector('input[name=ormeggioTipo]:checked');
+  ormeggioTipo = ormeggioTipo ? ormeggioTipo.value : 'antistanti';
+  var prefix = ormeggioTipo === 'ormeggio' ? 'nel punto di ormeggio' : 'nelle acque di/antistanti';
   var lat = val('f_lat') + (val('f_latDir') ? ' ' + val('f_latDir') : '');
   var lng = val('f_long') + (val('f_longDir') ? ' ' + val('f_longDir') : '');
   var verbalizzanti = collectVerbalizzanti();
 
-  para('L\'anno 2026 il giorno ' + giorno + ' del mese di ' + mese + ' alle ore ' + ore +
-    ', in acque di/punto di ormeggio ' + ormeggio +
-    ', in posizione di coordinate geografiche LAT. ' + lat + ' LONG. ' + lng +
-    ', i sottoscritti verbalizzanti ' + verbalizzanti +
-    ', appartenenti all\'Ufficio in intestazione, hanno proceduto al controllo della seguente unità da diporto:');
+  richPara([
+    N("L'anno 2026 il giorno"), B(giorno), N("del mese di"), B(mese), N("alle ore"), B(ore),
+    N(', ' + prefix), B(ormeggio),
+    N(', in posizione di coordinate geografiche LAT.'), B(lat), N('LONG.'), B(lng),
+    N(', i sottoscritti verbalizzanti'), B(verbalizzanti),
+    N(", appartenenti all'Ufficio in intestazione, hanno proceduto al controllo della seguente unità da diporto:")
+  ]);
 
   var tipoUnita = document.querySelector('input[name=tipoUnita]:checked');
   tipoUnita = tipoUnita ? tipoUnita.value : '';
   if(tipoUnita === 'Imbarcazione'){
-    para('Imbarcazione/nave da diporto iscritta, sigla di individuazione: ' + val('f_sigla') + '.');
+    richPara([
+      N('Imbarcazione/nave da diporto iscritta, sigla di individuazione:'), B(val('f_sigla')), N('.')
+    ]);
   } else if(tipoUnita === 'Natante'){
     var lunghezza = val('f_lunghezza') + ' ' + val('f_lunghezzaUnita');
-    para('Natante: tipo ' + val('f_tipoNatante') +
-      (val('f_siglaNatante') ? ' (sigla di individuazione: ' + val('f_siglaNatante') + ')' : '') +
-      '; marca/modello: ' + val('f_marcaModello') + '; lunghezza f.t.: ' + lunghezza +
-      '; motore/i: marca ' + val('f_marcaMotore') + ', Hp/Cv ' + val('f_hpCv') +
-      ', matricola/e ' + val('f_matricolaMotore') + '.');
+    var segs = [N('Natante: tipo'), B(val('f_tipoNatante'))];
+    if(val('f_siglaNatante')){
+      segs.push(N('(sigla di individuazione:')); segs.push(B(val('f_siglaNatante'))); segs.push(N(')'));
+    }
+    segs.push(N('; marca/modello:')); segs.push(B(val('f_marcaModello')));
+    segs.push(N('; lunghezza f.t.:')); segs.push(B(lunghezza));
+    segs.push(N('; motore/i: marca')); segs.push(B(val('f_marcaMotore')));
+    segs.push(N(', Hp/Cv')); segs.push(B(val('f_hpCv')));
+    segs.push(N(', matricola/e')); segs.push(B(val('f_matricolaMotore')));
+    segs.push(N('.'));
+    richPara(segs);
   }
 
-  para('Unità di proprietà/armatore: ' + val('f_proprietario') + ', con al comando/condotta da ' +
-    val('f_conduttoreNome') + ', generalità: ' + val('f_generalitaConduttore') + '.');
+  var uso = document.querySelector('input[name=uso]:checked');
+  if(uso){
+    richPara([N("Destinazione d'uso:"), B(uso.value), N('.')]);
+  }
+
+  richPara([
+    N('Unità di proprietà/armatore:'), B(val('f_proprietario')),
+    N(', con al comando/condotta da'), B(val('f_conduttoreNome')),
+    N(', generalità:'), B(val('f_generalitaConduttore')), N('.')
+  ]);
 
   if(val('f_reperibilita')){
-    para('Reperibile al numero di telefono o e-mail o P.e.c.: ' + val('f_reperibilita') + '.');
+    richPara([N('Reperibile al numero di telefono o e-mail o P.e.c.:'), B(val('f_reperibilita')), N('.')]);
   }
 
   var tipoDoc = val('f_tipoDoc');
   if(tipoDoc === 'Patente Nautica'){
-    para('Identificato a mezzo Patente Nautica n. ' + val('f_patenteNum') + ', rilasciata il ' +
-      val('f_patenteRilascio') + ' da ' + val('f_patenteEnte') + ' (scadenza ' + val('f_patenteScadenza') + ').');
+    richPara([
+      N('Identificato a mezzo Patente Nautica n.'), B(val('f_patenteNum')),
+      N(', rilasciata il'), B(val('f_patenteRilascio')), N('da'), B(val('f_patenteEnte')),
+      N('(scadenza'), B(val('f_patenteScadenza')), N(').')
+    ]);
   } else {
-    para('Identificato a mezzo documento tipo ' + tipoDoc + ' n. ' + val('f_numDoc') + ', rilasciato il ' +
-      val('f_rilascioDoc') + ' da ' + val('f_enteDoc') + ' (scadenza ' + val('f_scadenzaDoc') + ').');
+    richPara([
+      N('Identificato a mezzo documento tipo'), B(tipoDoc), N('n.'), B(val('f_numDoc')),
+      N(', rilasciato il'), B(val('f_rilascioDoc')), N('da'), B(val('f_enteDoc')),
+      N('(scadenza'), B(val('f_scadenzaDoc')), N(').')
+    ]);
     if(val('f_patenteNum')){
-      para('Patente nautica n. ' + val('f_patenteNum') + ', rilasciata il ' + val('f_patenteRilascio') +
-        ' da ' + val('f_patenteEnte') + ' (scadenza ' + val('f_patenteScadenza') + ').');
+      richPara([
+        N('Patente nautica n.'), B(val('f_patenteNum')), N(', rilasciata il'), B(val('f_patenteRilascio')),
+        N('da'), B(val('f_patenteEnte')), N('(scadenza'), B(val('f_patenteScadenza')), N(').')
+      ]);
     }
   }
 
   var distanza = val('f_distanza') + ' ' + val('f_distanzaUnita');
-  para('Al momento del controllo esperito, si è proceduto a verificare: la distanza dalla costa pari a ' +
-    distanza + '; la regolare tenuta della documentazione di bordo in corso di validità; la presenza dei ' +
-    'mezzi di salvataggio e delle dotazioni di sicurezza in relazione alla navigazione effettuata, che ' +
-    'devono essere mantenuti in corso di validità.');
+  richPara([
+    N('Al momento del controllo esperito, si è proceduto a verificare: la distanza dalla costa pari a'),
+    B(distanza),
+    N('; la regolare tenuta della documentazione di bordo in corso di validità; la presenza dei mezzi di salvataggio e delle dotazioni di sicurezza in relazione alla navigazione effettuata, che devono essere mantenuti in corso di validità.')
+  ]);
 
   para('È cura dell\'armatore/proprietario mantenere l\'unità in buone condizioni d\'uso e provvedere alla ' +
     'sua manutenzione per quanto attiene allo scafo, all\'apparato motore, all\'impianto elettrico e alla ' +
     'protezione contro gli incendi, nonché alla sostituzione delle apparecchiature, dei mezzi di salvataggio ' +
     'e delle dotazioni di sicurezza che presentino deterioramento o deficienze tali da comprometterne ' +
-    'l\'efficienza, nonché di mantenere in corso di validità tutta la documentazione e le certificazioni di bordo.', {size:9});
+    'l\'efficienza, nonché di mantenere in corso di validità tutta la documentazione e le certificazioni di bordo.',
+    {size:8.7, lineHeight:4.3, gapAfter:1.4});
 
   para('È responsabilità dell\'armatore/proprietario applicare il Bollino blu su una zona ben visibile ' +
     'dell\'unità e, altresì, riferire all\'atto del controllo di aver già, eventualmente, ricevuto analogo ' +
-    'controllo con rilascio del bollino dell\'anno in corso.', {size:9});
+    'controllo con rilascio del bollino dell\'anno in corso.',
+    {size:8.7, lineHeight:4.3, gapAfter:1.4});
 
   if(val('f_annotazioni')){
-    para('ANNOTAZIONI: ' + val('f_annotazioni'));
+    richPara([N('ANNOTAZIONI:'), B(val('f_annotazioni'))]);
   }
 
   var bollino = val('f_bollino');
-  para('I sottoscritti verbalizzanti, all\'esito dei controlli effettuati, avendo riscontrato la regolarità ' +
-    'di quanto verificato, hanno proceduto al rilascio del bollino autoadesivo per l\'anno in corso' +
-    (bollino ? ' N° ' + bollino : ' N° _____') +
-    ' posto su una zona ben visibile dell\'unità, ai fini dell\'applicazione della Direttiva n. 103/2026.');
+  var bolSegs = [N("I sottoscritti verbalizzanti, all'esito dei controlli effettuati, avendo riscontrato la regolarità di quanto verificato, hanno proceduto al rilascio del bollino autoadesivo per l'anno in corso")];
+  if(bollino){ bolSegs.push(N('N°')); bolSegs.push(B(bollino)); }
+  else { bolSegs.push(N('N° _____')); }
+  bolSegs.push(N("posto su una zona ben visibile dell'unità, ai fini dell'applicazione della Direttiva n. 103/2026."));
+  richPara(bolSegs);
 
-  para('Il presente verbale deve essere custodito a bordo in originale per essere esibito a richiesta degli organi di controllo.', {size:9, gapAfter:8});
+  para('Il presente verbale deve essere custodito a bordo in originale per essere esibito a richiesta degli organi di controllo.',
+    {size:8.7, lineHeight:4.3, gapAfter:6});
 
-  // Signatures
-  ensureSpace(50);
-  var sigW = 70, sigH = 26;
-  var col1X = marginL, col2X = pageW - marginR - sigW;
-  doc.setFont('helvetica','bold'); doc.setFontSize(9);
-  doc.text('I VERBALIZZANTI', col1X, y);
-  doc.text('LA PARTE', col2X, y, {align:'left'});
-  y += 4;
-
+  // Signatures — riservo lo spazio dell'intero blocco così non viene spezzato tra due pagine
   var verb2Visible = !verb2Card.classList.contains('hidden');
+  var sigW = 68 * MM2PX, sigH = (verb2Visible ? 20 : 24) * MM2PX;
+  var sigBlockHeight = 6*MM2PX + (verb2Visible ? (2*sigH + 6*MM2PX) : (sigH + 4*MM2PX)) + 4*MM2PX;
+  ensureSpace(sigBlockHeight);
+
+  var col1X = marginL, col2X = PAGE_W - marginR - sigW;
+  setFont(9, true);
+  ctx.fillText('I VERBALIZZANTI', col1X, y);
+  ctx.fillText('LA PARTE', col2X, y);
+  y += 4 * MM2PX;
+
   if(sigPads[1].hasInk){
-    doc.addImage(sigPads[1].canvas.toDataURL('image/png'), 'PNG', col1X, y, sigW, sigH);
+    ctx.drawImage(sigPads[1].canvas, col1X, y, sigW, sigH);
   }
   if(verb2Visible && sigPads[2].hasInk){
-    doc.addImage(sigPads[2].canvas.toDataURL('image/png'), 'PNG', col1X, y + sigH + 4, sigW, sigH);
+    ctx.drawImage(sigPads[2].canvas, col1X, y + sigH + 4*MM2PX, sigW, sigH);
   }
   if(sigPads[3].hasInk){
-    doc.addImage(sigPads[3].canvas.toDataURL('image/png'), 'PNG', col2X, y, sigW, sigH);
+    ctx.drawImage(sigPads[3].canvas, col2X, y, sigW, sigH);
   }
-  doc.setDrawColor(180,180,180);
-  doc.line(col1X, y+sigH+2, col1X+sigW, y+sigH+2);
+  ctx.strokeStyle = '#b4b4b4';
+  ctx.lineWidth = 1;
+  function hline(x1, yy, x2){ ctx.beginPath(); ctx.moveTo(x1,yy); ctx.lineTo(x2,yy); ctx.stroke(); }
+  hline(col1X, y+sigH+2*MM2PX, col1X+sigW);
   if(verb2Visible){
-    doc.line(col1X, y+2*sigH+6, col1X+sigW, y+2*sigH+6);
+    hline(col1X, y+2*sigH+6*MM2PX, col1X+sigW);
   }
-  doc.line(col2X, y+sigH+2, col2X+sigW, y+sigH+2);
+  hline(col2X, y+sigH+2*MM2PX, col2X+sigW);
 
-  y += (verb2Visible ? 2*sigH + 10 : sigH + 8);
+  y += (verb2Visible ? 2*sigH + 10*MM2PX : sigH + 8*MM2PX);
+
+  // Assemblo il PDF finale: ogni pagina è un'immagine (nessun testo estraibile),
+  // con permessi bloccati in modifica/copia per scoraggiare la conversione in Word.
+  var jsPDF = window.jspdf.jsPDF;
+  var ownerPass = 'vb-' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+  var doc = new jsPDF({
+    unit: 'mm', format: 'a4',
+    encryption: { userPassword: '', ownerPassword: ownerPass, userPermissions: ['print'] }
+  });
+  pages.forEach(function(pageCanvas, idx){
+    if(idx > 0) doc.addPage();
+    var dataUrl = pageCanvas.toDataURL('image/jpeg', 0.93);
+    doc.addImage(dataUrl, 'JPEG', 0, 0, PAGE_W_MM, PAGE_H_MM);
+  });
 
   return doc;
 }
@@ -1639,18 +1810,27 @@ function fileNameForPdf(){
   return 'Verbale_' + comando + '_' + giorno + (mese ? '_' + mese : '') + '_2026.pdf';
 }
 
-document.getElementById('generateBtn').addEventListener('click', function(){
+document.getElementById('generateBtn').addEventListener('click', async function(){
   var err = validateAll();
   if(err){ alert(err); return; }
 
-  var doc = buildPdf();
-  var blob = doc.output('blob');
-  if(lastPdfUrl) URL.revokeObjectURL(lastPdfUrl);
-  lastPdfBlob = blob;
-  lastPdfUrl = URL.createObjectURL(blob);
+  var btn = this;
+  var originalLabel = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Generazione in corso…';
+  try{
+    var doc = await buildPdf();
+    var blob = doc.output('blob');
+    if(lastPdfUrl) URL.revokeObjectURL(lastPdfUrl);
+    lastPdfBlob = blob;
+    lastPdfUrl = URL.createObjectURL(blob);
 
-  document.getElementById('resultPanel').style.display = 'block';
-  document.getElementById('resultPanel').scrollIntoView({behavior:'smooth', block:'start'});
+    document.getElementById('resultPanel').style.display = 'block';
+    document.getElementById('resultPanel').scrollIntoView({behavior:'smooth', block:'start'});
+  } finally {
+    btn.disabled = false;
+    btn.textContent = originalLabel;
+  }
 });
 
 document.getElementById('previewBtn').addEventListener('click', function(){

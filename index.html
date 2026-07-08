@@ -726,7 +726,7 @@
         <textarea id="f_annotazioni" placeholder="Testo libero…"></textarea>
       </div>
       <div class="field">
-        <label class="flabel" for="f_bollino">Nr. Bollino Blu <span class="opt">(facoltativo)</span></label>
+        <label class="flabel" for="f_bollino">Nr. Bollino Blu</label>
         <input class="mono" id="f_bollino" type="text" placeholder="es. 001/2026">
       </div>
     </div>
@@ -1490,6 +1490,13 @@ var lastPdfBlob = null;
 var lastPdfUrl = null;
 
 function val(id){ var el = document.getElementById(id); return el ? el.value.trim() : ''; }
+function valDate(id){
+  var raw = val(id);
+  if(!raw) return '';
+  var m = raw.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if(!m) return raw;
+  return m[3] + '/' + m[2] + '/' + m[1];
+}
 
 function collectVerbalizzanti(){
   var list = [];
@@ -1610,29 +1617,42 @@ async function buildPdf(){
         words.push({ text:p, bold:seg.bold });
       });
     });
-    setFont(sizePt, false);
-    var spaceW = ctx.measureText(' ').width;
-    var line = [], lineWidth = 0;
-    function flush(){
-      if(!line.length) return;
-      ensureSpace(lineHeight + 1);
-      var x = marginL;
-      line.forEach(function(w){
-        setFont(sizePt, w.bold);
-        ctx.fillText(w.text, x, y);
-        x += ctx.measureText(w.text).width + spaceW;
-      });
-      y += lineHeight;
-      line = []; lineWidth = 0;
-    }
+    var spaceW = (function(){ setFont(sizePt, false); return ctx.measureText(' ').width; })();
+
+    // misuro ogni parola e la suddivido in righe (senza disegnare ancora)
     words.forEach(function(w){
       setFont(sizePt, w.bold);
-      var ww = ctx.measureText(w.text).width;
-      if(lineWidth + ww > usableW && line.length){ flush(); }
-      line.push(w);
-      lineWidth += ww + spaceW;
+      w._w = ctx.measureText(w.text).width;
     });
-    flush();
+    var lines = [];
+    var current = [], currentWidth = 0;
+    words.forEach(function(w){
+      if(current.length && currentWidth + w._w > usableW){
+        lines.push(current);
+        current = []; currentWidth = 0;
+      }
+      current.push(w);
+      currentWidth += w._w + spaceW;
+    });
+    if(current.length) lines.push(current);
+
+    // disegno: tutte le righe giustificate tranne l'ultima del paragrafo (allineata a sinistra)
+    lines.forEach(function(lineWords, idx){
+      ensureSpace(lineHeight + 1);
+      var isLast = idx === lines.length - 1;
+      var sumW = lineWords.reduce(function(s, w){ return s + w._w; }, 0);
+      var nGaps = lineWords.length - 1;
+      var gap = (!isLast && nGaps > 0 && opts.justify !== false)
+        ? (usableW - sumW) / nGaps
+        : spaceW;
+      var x = marginL;
+      lineWords.forEach(function(w){
+        setFont(sizePt, w.bold);
+        ctx.fillText(w.text, x, y);
+        x += w._w + gap;
+      });
+      y += lineHeight;
+    });
     y += (opts.gapAfter !== undefined ? opts.gapAfter : 1.6) * MM2PX;
   }
 
@@ -1712,19 +1732,19 @@ async function buildPdf(){
   if(tipoDoc === 'Patente Nautica'){
     richPara([
       N('Identificato a mezzo Patente Nautica n.'), B(val('f_patenteNum')),
-      N(', rilasciata il'), B(val('f_patenteRilascio')), N('da'), B(val('f_patenteEnte')),
-      N('(scadenza'), B(val('f_patenteScadenza')), N(').')
+      N(', rilasciata il'), B(valDate('f_patenteRilascio')), N('da'), B(val('f_patenteEnte')),
+      N('(scadenza'), B(valDate('f_patenteScadenza')), N(').')
     ]);
   } else {
     richPara([
       N('Identificato a mezzo documento tipo'), B(tipoDoc), N('n.'), B(val('f_numDoc')),
-      N(', rilasciato il'), B(val('f_rilascioDoc')), N('da'), B(val('f_enteDoc')),
-      N('(scadenza'), B(val('f_scadenzaDoc')), N(').')
+      N(', rilasciato il'), B(valDate('f_rilascioDoc')), N('da'), B(val('f_enteDoc')),
+      N('(scadenza'), B(valDate('f_scadenzaDoc')), N(').')
     ]);
     if(val('f_patenteNum')){
       richPara([
-        N('Patente nautica n.'), B(val('f_patenteNum')), N(', rilasciata il'), B(val('f_patenteRilascio')),
-        N('da'), B(val('f_patenteEnte')), N('(scadenza'), B(val('f_patenteScadenza')), N(').')
+        N('Patente nautica n.'), B(val('f_patenteNum')), N(', rilasciata il'), B(valDate('f_patenteRilascio')),
+        N('da'), B(val('f_patenteEnte')), N('(scadenza'), B(valDate('f_patenteScadenza')), N(').')
       ]);
     }
   }

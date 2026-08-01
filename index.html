@@ -195,6 +195,18 @@
     border-color:var(--required);
     box-shadow:0 0 0 3px rgba(165,54,31,.14);
   }
+  .toggle-group.invalid{
+    border-radius:8px;
+    box-shadow:0 0 0 3px rgba(165,54,31,.14);
+  }
+  .toggle-group.invalid .toggle-opt{ border-color:var(--required); }
+  .dot-validation-msg{
+    display:none;
+    background:#fdf1ee; border:1px solid #e3b3a8; color:var(--required);
+    border-radius:8px; padding:11px 12px; font-size:13px; font-weight:600;
+    margin-bottom:14px;
+  }
+  .dot-validation-msg.show{ display:block; }
   .row2{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
   .row3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;}
   .with-unit{display:flex; gap:8px;}
@@ -323,6 +335,115 @@
     font-family:var(--mono);
   }
 
+  /* ---------- Mode select screen ---------- */
+  #modeSelectScreen{
+    display:flex; align-items:center; justify-content:center;
+    min-height:calc(100vh - 220px);
+  }
+  .mode-select-wrap{ width:100%; max-width:480px; margin:0 auto; }
+  .mode-select-intro{
+    text-align:center; color:var(--ink-soft); font-size:14px; margin:4px 0 18px;
+  }
+  .mode-card{
+    display:block; width:100%; text-align:left;
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:18px 18px; margin-bottom:14px; cursor:pointer;
+  }
+  .mode-card:active{ background:#f3f5f3; }
+  .mode-card-title{
+    display:block; font-family:var(--serif); font-weight:700; font-size:17px;
+    color:var(--navy-deep); margin-bottom:6px;
+  }
+  .mode-card-desc{
+    display:block; font-size:13px; color:var(--ink-soft); line-height:1.45;
+  }
+
+  .back-link{
+    display:inline-block; background:none; border:none; cursor:pointer;
+    color:var(--navy-soft); font-size:13px; font-weight:600;
+    padding:4px 0 14px; text-decoration:underline;
+  }
+
+  .checkbox-row{
+    display:flex; align-items:flex-start; gap:10px;
+    font-size:13px; color:var(--ink-soft); line-height:1.4;
+    cursor:pointer; margin-top:4px;
+  }
+  .checkbox-row input{ margin-top:2px; flex:0 0 auto; width:auto; }
+  .checkbox-row span{ flex:1; }
+
+  #genericHeaderBlock.hidden, #verbaleHeaderBlock.hidden, #dotazioniHeaderBlock.hidden { display:none; }
+
+  /* ---------- Dotazioni result ---------- */
+  .dot-result-section{ margin-top:16px; }
+  .dot-result-title{
+    font-family:var(--serif); font-weight:700; font-size:15.5px; color:var(--navy-deep);
+    margin:0 0 4px;
+  }
+  .dot-result-sub{ font-size:12px; color:var(--ink-soft); margin:0 0 10px; }
+  .dot-item{
+    display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+    padding:10px 4px; border-bottom:1px solid var(--line-soft);
+    font-size:13.5px;
+  }
+  .dot-item-wrap:last-child .dot-item{ border-bottom:none; }
+  .dot-item-check{
+    display:flex; align-items:flex-start; gap:10px; flex:1; cursor:pointer;
+  }
+  .dot-item-check input.dot-checkbox{
+    margin-top:2px; flex:0 0 auto; width:18px; height:18px; accent-color: var(--ok);
+  }
+  .dot-item.dot-checked{ background:var(--ok-bg); border-radius:6px; }
+  .dot-item.dot-checked .dot-item-label{ color:var(--ok); }
+  .dot-item-label{ color:var(--ink); }
+  .dot-item-qty{
+    font-family:var(--mono); font-size:12.5px; color:var(--navy-soft); font-weight:700;
+    white-space:nowrap; padding-top:2px;
+  }
+  .dot-item-alt{ background:#fbfbfa; }
+  .dot-subchecklist{
+    padding:2px 4px 8px 30px;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .dot-subitem{
+    padding:6px 0; font-size:12.5px; color:var(--ink-soft);
+  }
+  .dot-subitem.dot-checked{ color:var(--ok); }
+  .dot-subitem input.dot-checkbox{ width:16px; height:16px; }
+  .dot-note-tag{
+    display:inline-block; font-family:var(--mono); font-size:10.5px; color:var(--gold);
+    border:1px solid var(--gold-soft); border-radius:4px; padding:0 4px; margin-left:6px;
+    cursor:pointer; background:#fffdf7; line-height:1.6;
+  }
+  .dot-note-tag:active{ background:var(--gold-soft); }
+  .dot-note-details{ padding:0 4px 8px 4px; }
+  .dot-note-detail{
+    font-size:12px; color:var(--ink-soft); background:#fffdf7; border:1px solid var(--gold-soft);
+    border-radius:6px; padding:8px 10px; margin-top:4px; line-height:1.45;
+    white-space:pre-line;
+  }
+  .dot-note-detail strong{ color:var(--gold); }
+  .dot-subgroup-title{
+    font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.03em;
+    color:var(--navy-soft); margin-top:8px; padding:0 0 2px 0;
+  }
+  .dot-subgroup-title:first-child{ margin-top:0; }
+  .dot-empty{ font-size:13px; color:#8b98a1; font-style:italic; padding:10px 4px; }
+  .dot-callout{
+    background:#fdf3e8; border:1px solid #ecd9b8; color:#7a5a1e;
+    border-radius:8px; padding:10px 12px; font-size:12.5px; margin:10px 0;
+  }
+  .dot-notes-toggle{
+    margin-top:16px;
+  }
+  .dot-notes-panel{
+    margin-top:10px; font-size:12px; color:var(--ink-soft); line-height:1.5;
+  }
+  .dot-notes-panel ol{ padding-left:18px; margin:6px 0; }
+  .dot-notes-panel ul{ padding-left:18px; margin:6px 0; }
+  .dot-notes-panel li{ margin-bottom:6px; }
+
+
   /* ---------- Disclaimer modal ---------- */
   #disclaimerOverlay{
     position:fixed; inset:0; z-index:1000;
@@ -371,12 +492,12 @@
 <div id="disclaimerOverlay">
   <div class="disclaimer-card">
     <div class="disclaimer-eyebrow">Avviso importante</div>
-    <h2 class="disclaimer-title">Strumento non ufficiale</h2>
+    <h2 class="disclaimer-title">Strumenti non ufficiali</h2>
     <p class="disclaimer-text">
       La presente applicazione <strong>non è un'applicazione ufficiale del Comando Generale del Corpo delle
       Capitanerie di Porto – Guardia Costiera</strong>. Si tratta di un sussidio operativo messo a disposizione
-      del personale per agevolare la compilazione del verbale, e non sostituisce le procedure, i moduli e i
-      sistemi ufficiali dell'Amministrazione.
+      del personale per agevolare le attività di controllo e verbalizzazione, e non sostituisce le procedure, i moduli e i
+      sistemi ufficiali dell'Amministrazione, né la consultazione diretta della normativa vigente.
     </p>
     <p class="disclaimer-text">
       Tutti i dati inseriti restano esclusivamente sul dispositivo in uso: l'applicazione non trasmette né
@@ -384,8 +505,8 @@
       nella disponibilità dell'utilizzatore.
     </p>
     <p class="disclaimer-text">
-      <strong>Il solo verbale generato da questa applicazione, privo del relativo Bollino Blu ad esso associato,
-      non ha valore.</strong>
+      <strong>Il solo verbale delle operazioni compiute generato da questa applicazione, privo del relativo Bollino Blu
+      ad esso associato, non ha valore.</strong>
     </p>
     <p class="disclaimer-text">
       Per segnalare problematiche, suggerimenti o altro, contattare via Telegram
@@ -395,7 +516,7 @@
       <input type="checkbox" id="disclaimerAck">
       Dichiaro di aver letto e compreso quanto sopra.
     </label>
-    <button class="btn btn-primary" id="disclaimerOk" disabled>OK — Prosegui alla compilazione</button>
+    <button class="btn btn-primary" id="disclaimerOk" disabled>OK — Prosegui</button>
   </div>
 </div>
 
@@ -414,17 +535,46 @@
   </div>
   <img class="gov-logo" src="data:image/png;base64,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" alt="Emblema della Repubblica Italiana">
   <div class="eyebrow">Capitaneria di Porto · Guardia Costiera</div>
-  <h1 class="title">Verbale delle Operazioni Compiute</h1>
-  <p class="subtitle">Accertamento preventivo delle condizioni di sicurezza di unità da diporto — art. 26-bis, comma 2, D.Lgs. 18 luglio 2005 n. 171</p>
-  <div class="comando-row">
-    <label for="f_comando">Comando</label>
-    <input id="f_comando" type="text" placeholder="es. Savona">
+
+  <div id="genericHeaderBlock">
+    <h1 class="title">Applicazioni di supporto operativo</h1>
+    <p class="subtitle">Strumenti non ufficiali ad uso del personale operante</p>
   </div>
-  <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
-  <div class="progress-label" id="progressLabel">0 di 0 campi obbligatori compilati</div>
+
+  <div id="verbaleHeaderBlock" class="hidden">
+    <h1 class="title">Verbale delle Operazioni Compiute</h1>
+    <p class="subtitle">Accertamento preventivo delle condizioni di sicurezza di unità da diporto — art. 26-bis, comma 2, D.Lgs. 18 luglio 2005 n. 171</p>
+    <div class="comando-row">
+      <label for="f_comando">Comando</label>
+      <input id="f_comando" type="text" placeholder="es. Savona">
+    </div>
+    <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+    <div class="progress-label" id="progressLabel">0 di 0 campi obbligatori compilati</div>
+  </div>
+
+  <div id="dotazioniHeaderBlock" class="hidden">
+    <h1 class="title">Controllo Dotazioni di Sicurezza</h1>
+    <p class="subtitle">Riscontro delle dotazioni minime (Allegato V) e raccomandate (Allegato V-bis) in base alla distanza dalla costa</p>
+  </div>
 </header>
 
-<main id="mainForm">
+<main id="modeSelectScreen">
+  <div class="mode-select-wrap">
+    <p class="mode-select-intro">Seleziona lo strumento che vuoi utilizzare:</p>
+    <button class="mode-card" id="modeDotazioniBtn">
+      <span class="mode-card-title">Controllo dotazioni</span>
+      <span class="mode-card-desc">Verifica le dotazioni di sicurezza minime e raccomandate a bordo, in base alla distanza dalla costa.</span>
+    </button>
+    <button class="mode-card" id="modeVerbaleBtn">
+      <span class="mode-card-title">Verb. Op. Bollini Blu</span>
+      <span class="mode-card-desc">Compila il verbale delle operazioni compiute e genera il PDF con le firme.</span>
+    </button>
+  </div>
+</main>
+
+<main id="mainForm" class="hidden">
+  <button class="back-link" id="backFromVerbale">← Torna alla scelta dello strumento</button>
+
 
   <div id="resultPanel">
     <h3>Verbale generato</h3>
@@ -715,7 +865,7 @@
       <div class="field">
         <label class="flabel" for="f_distanza">Distanza dalla costa al momento del controllo<span class="req">*</span></label>
         <div class="with-unit">
-          <input class="mono" id="f_distanza" type="number" step="0.01" min="0" data-required>
+          <input class="mono" id="f_distanza" type="text" inputmode="decimal" data-required>
           <select id="f_distanzaUnita">
             <option value="m">metri</option><option value="Miglia Nautiche">miglia naut.</option>
           </select>
@@ -778,9 +928,202 @@
 
 </main>
 
-<div class="action-bar">
+<main id="dotazioniPage" class="hidden">
+  <button class="back-link" id="backFromDotazioni">← Torna alla scelta dello strumento</button>
+
+  <div class="banner">
+    Strumento di supporto: aiuta a individuare rapidamente le dotazioni previste dagli Allegati V e V-bis al Regolamento
+    di attuazione del Codice della Nautica da Diporto, in base alla distanza dalla costa dichiarata. Non sostituisce
+    la verifica diretta delle dotazioni effettivamente presenti a bordo né la consultazione della normativa vigente.
+  </div>
+
+  <section class="section">
+    <div class="section-head"><span class="section-num">1</span><span class="section-title">Tipologia di unità</span></div>
+    <div class="section-body">
+      <div class="field">
+        <label class="flabel">Categoria d'uso</label>
+        <select id="d_categoria">
+          <option value="diporto_puro">Diporto Puro</option>
+          <option value="noleggio">Noleggio</option>
+        </select>
+        <div class="hint">Altre categorie saranno aggiunte in seguito.</div>
+      </div>
+      <div class="field">
+        <label class="flabel">Tipo di unità</label>
+        <div class="toggle-group" id="dTipoUnitaGroup">
+          <label class="toggle-opt hidden" data-val="Nave" id="dTipoNaveOpt"><input type="radio" name="dTipoUnita" value="Nave">Nave</label>
+          <label class="toggle-opt active" data-val="Imbarcazione"><input type="radio" name="dTipoUnita" value="Imbarcazione" checked>Imbarcazione</label>
+          <label class="toggle-opt" data-val="Natante"><input type="radio" name="dTipoUnita" value="Natante">Natante</label>
+        </div>
+      </div>
+      <div class="field" id="dAndaturaField">
+        <label class="flabel">A</label>
+        <div class="toggle-group" id="dAndaturaGroup">
+          <label class="toggle-opt active" data-val="Motore"><input type="radio" name="dAndatura" value="Motore" checked>Motore</label>
+          <label class="toggle-opt" data-val="Vela"><input type="radio" name="dAndatura" value="Vela">Vela</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="row2">
+          <div class="field">
+            <label class="flabel" for="d_passeggeri">Numero passeggeri</label>
+            <input class="mono" id="d_passeggeri" type="text" inputmode="numeric" placeholder="es. 6">
+          </div>
+          <div class="field">
+            <label class="flabel" for="d_equipaggio">Numero equipaggio</label>
+            <input class="mono" id="d_equipaggio" type="text" inputmode="numeric" placeholder="es. 1">
+          </div>
+        </div>
+        <div class="hint">I mezzi collettivi e individuali di salvataggio devono essere sufficienti per tutte le persone a bordo, equipaggio compreso.</div>
+        <div class="hint hidden" id="dNoleggioPasseggeriHint">Per le unità adibite a noleggio, il numero dei passeggeri (escluso l'equipaggio) non può superare le 12 unità (art. 88, D.M. 146/2008).</div>
+        <div class="banner hidden" id="dEquipaggioMinimoWarning" style="color:#a5361f; border-color:#e3b3a8; background:#fdf1ee;"></div>
+      </div>
+      <div class="field" id="dLftField">
+        <label class="flabel" for="d_lft">Lunghezza fuori tutto (LFT)</label>
+        <div class="with-unit">
+          <input class="mono" id="d_lft" type="text" inputmode="decimal" placeholder="es. 8,50">
+          <select id="d_lftUnita">
+            <option value="m">m</option>
+            <option value="ft">piedi</option>
+          </select>
+        </div>
+        <div class="hint">Alcune dotazioni (es. pallone nero di fonda, fischio e campana) sono previste solo oltre una determinata lunghezza.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><span class="section-num">2</span><span class="section-title">Estintori — marcatura ed alimentazione</span></div>
+    <div class="section-body">
+      <div class="field">
+        <label class="flabel">Marcatura CE dell'unità</label>
+        <div class="toggle-group" id="dMarcaturaCEGroup">
+          <label class="toggle-opt active" data-val="si"><input type="radio" name="dMarcaturaCE" value="si" checked>Marcata CE</label>
+          <label class="toggle-opt" data-val="no"><input type="radio" name="dMarcaturaCE" value="no">Non marcata CE</label>
+        </div>
+      </div>
+
+      <div id="dCeFields">
+        <div class="banner">Per le unità con marcatura CE, il numero e il tipo di estintori sono individuati dal manuale del proprietario (Allegato V, lett. E, punto 1).</div>
+      </div>
+
+      <div id="dNonCeFields" class="hidden">
+        <div class="field">
+          <label class="flabel" for="d_potenzaMotore">Potenza motore totale installata</label>
+          <div class="with-unit">
+            <input class="mono" id="d_potenzaMotore" type="text" inputmode="decimal" placeholder="es. 55">
+            <select id="d_potenzaUnita">
+              <option value="kw">kW</option>
+              <option value="cv">CV</option>
+              <option value="hp">HP</option>
+            </select>
+          </div>
+          <div class="hint">Necessaria per individuare numero, collocazione e capacità estinguente degli estintori (Allegato V, lett. E, punto 2).</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hidden" id="dNoleggioSection">
+    <div class="section-head"><span class="section-num">3</span><span class="section-title">Noleggio — limiti di navigazione</span></div>
+    <div class="section-body">
+      <div class="field">
+        <label class="flabel">Dichiarazione di autolimitazione presente?</label>
+        <div class="toggle-group" id="dAutolimitazioneGroup">
+          <label class="toggle-opt" data-val="si"><input type="radio" name="dAutolimitazione" value="si">Sì</label>
+          <label class="toggle-opt active" data-val="no"><input type="radio" name="dAutolimitazione" value="no" checked>No</label>
+        </div>
+        <div class="hint">Dichiarazione in carta semplice, annotata sul Certificato di Idoneità (art. 88, comma 2, D.M. 146/2008).</div>
+      </div>
+
+      <div class="field hidden" id="dLimiteDichiaratoField">
+        <label class="flabel">Limite dichiarato</label>
+        <div class="toggle-group" id="dLimiteDichiaratoGroup">
+          <label class="toggle-opt" data-val="acque_interne"><input type="radio" name="dLimiteDichiarato" value="acque_interne">Acque interne</label>
+          <label class="toggle-opt" data-val="3mi"><input type="radio" name="dLimiteDichiarato" value="3mi">3 miglia</label>
+          <label class="toggle-opt" data-val="6mi"><input type="radio" name="dLimiteDichiarato" value="6mi">6 miglia</label>
+          <label class="toggle-opt" data-val="12mi"><input type="radio" name="dLimiteDichiarato" value="12mi">12 miglia</label>
+        </div>
+      </div>
+
+      <div class="field hidden" id="dImbarcazioneLicenzaField">
+        <label class="flabel">Licenza di navigazione <span class="opt">(unità non marcata CE)</span></label>
+        <div class="toggle-group" id="dLicenzaGroup">
+          <label class="toggle-opt" data-val="12mi"><input type="radio" name="dLicenza" value="12mi">Entro le 12 miglia</label>
+          <label class="toggle-opt" data-val="senza_limite"><input type="radio" name="dLicenza" value="senza_limite">Senza alcun limite</label>
+        </div>
+      </div>
+
+      <div class="field hidden" id="dNatanteIscrittoField">
+        <label class="flabel">Natante iscritto <span class="opt">(iscrizione all'archivio/registro)</span></label>
+        <div class="toggle-group" id="dNatanteIscrittoGroup">
+          <label class="toggle-opt" data-val="si"><input type="radio" name="dNatanteIscritto" value="si">Sì</label>
+          <label class="toggle-opt" data-val="no"><input type="radio" name="dNatanteIscritto" value="no">No</label>
+        </div>
+      </div>
+
+      <div class="hint" id="dNoleggioEsito" style="margin-top:6px;"></div>
+    </div>
+  </section>
+
+  <section class="section" id="dDistanzaSection">
+    <div class="section-head"><span class="section-num">4</span><span class="section-title">Distanza dalla costa</span></div>
+    <div class="section-body">
+      <div class="field">
+        <label class="flabel">Navigazione in acque interne</label>
+        <div class="toggle-group" id="dAcqueInterneGroup" data-optional="true">
+          <label class="toggle-opt" data-val="si"><input type="radio" name="dAcqueInterne" value="si">Sì, acque interne</label>
+        </div>
+        <div class="hint">Se selezionato, la distanza sotto viene ignorata e si applica la categoria "Acque interne".</div>
+      </div>
+      <div class="field" id="dDistanzaField">
+        <label class="flabel" for="d_distanza">Distanza dalla costa</label>
+        <div class="with-unit">
+          <input class="mono" id="d_distanza" type="text" inputmode="decimal" placeholder="es. 3">
+          <select id="d_distanzaUnita">
+            <option value="miglia">miglia naut.</option>
+            <option value="metri">metri</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field hidden" id="dPneumaticaEsenteBlock">
+        <label class="checkbox-row">
+          <input type="checkbox" id="d_pneumaticaEsente">
+          <span>Unità pneumatica (anche a carena rigida), categoria A/B/C conforme UNI EN ISO 6185 parti 3-4, esentata dalla zattera autogonfiabile entro le 12 miglia dalla costa</span>
+        </label>
+        <div class="hint">Disponibile solo tra le 6 e le 12 miglia dalla costa: entro le 6 miglia la zattera di salvataggio costiera non è comunque prevista dall'Allegato V, mentre oltre le 12 miglia l'esenzione non è consentita (art. 54, comma 2, D.M. 146/2008).</div>
+      </div>
+
+      <div class="field hidden" id="dSarGeoBlock">
+        <div class="banner">Navigazione oltre le 12 miglia dalla costa: verifica se è applicabile l'equivalenza dell'art. 54, comma 1, D.M. 146/2008.</div>
+        <label class="checkbox-row">
+          <input type="checkbox" id="d_sarNazionale">
+          <span>La navigazione si svolge comunque entro il limite dell'area di ricerca e soccorso nazionale (SAR)</span>
+        </label>
+        <label class="checkbox-row">
+          <input type="checkbox" id="d_geoLocalizzazione">
+          <span>L'unità è munita di strumenti elettronici per la geo-localizzazione</span>
+        </label>
+        <div class="hint">Se entrambe le condizioni sono selezionate, le dotazioni obbligatorie di cui all'Allegato V possono essere quelle previste per la navigazione entro le 12 miglia dalla costa.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="dot-validation-msg" id="dotazioniValidationMsg"></div>
+  <div id="dotazioniResult"></div>
+
+  <div class="completion-note">Verificare sempre lo stato d'uso, la scadenza e la corretta manutenzione di ogni dotazione presente a bordo.</div>
+</main>
+
+<div class="action-bar hidden" id="verbaleActionBar">
   <button class="btn btn-secondary" id="resetBtn" title="Nuovo verbale">↺ Nuovo</button>
   <button class="btn btn-primary" id="generateBtn">Genera PDF del verbale</button>
+</div>
+
+<div class="action-bar hidden" id="dotazioniActionBar">
+  <button class="btn btn-secondary" id="resetDotazioniBtn" title="Nuovo controllo">↺ Reset</button>
+  <button class="btn btn-primary" id="verificaDotazioniBtn" style="flex:1;">Verifica dotazioni</button>
 </div>
 
 
@@ -1185,7 +1528,8 @@ function wireToggleGroup(groupId, onChange){
   var group = document.getElementById(groupId);
   var opts = group.querySelectorAll('.toggle-opt');
   opts.forEach(function(opt){
-    opt.addEventListener('click', function(){
+    opt.addEventListener('click', function(e){
+      e.preventDefault();
       var input = opt.querySelector('input');
       var wasActive = opt.classList.contains('active');
       // allow "uso" group to be optional / deselectable
@@ -1243,6 +1587,33 @@ function wireCoordField(inputId, degreeDigits){
 }
 wireCoordField('f_lat', 2);
 wireCoordField('f_long', 3);
+
+/* ---------------- Input numerici con virgola (tastierino decimale) ---------------- */
+function wireDecimalInput(id, maxDecimals){
+  maxDecimals = maxDecimals === undefined ? 2 : maxDecimals;
+  var el = document.getElementById(id);
+  if(!el) return;
+  el.addEventListener('input', function(){
+    var v = el.value.replace(/[^0-9,]/g, '');
+    var parts = v.split(',');
+    if(parts.length > 2){ v = parts[0] + ',' + parts.slice(1).join(''); parts = v.split(','); }
+    if(parts[1] && parts[1].length > maxDecimals){
+      parts[1] = parts[1].slice(0, maxDecimals);
+      v = parts[0] + ',' + parts[1];
+    }
+    el.value = v;
+  });
+}
+function parseItNum(str){
+  if(str === null || str === undefined) return NaN;
+  var s = String(str).trim().replace(',', '.');
+  if(s === '') return NaN;
+  return parseFloat(s);
+}
+wireDecimalInput('f_distanza', 2);
+wireDecimalInput('d_distanza', 2);
+wireDecimalInput('d_potenzaMotore', 2);
+wireDecimalInput('d_lft', 2);
 
 /* ---------------- Auto-compilazione giorno/mese/ora correnti ---------------- */
 (function prefillDateTime(){
@@ -1892,6 +2263,1241 @@ document.getElementById('shareBtn').addEventListener('click', async function(){
     alert('La condivisione diretta non è supportata da questo browser. Usa "Salva sul dispositivo" e poi allega il PDF salvato a un\'e-mail o a un messaggio WhatsApp.');
   }
 });
+
+/* =====================================================================
+   NAVIGAZIONE TRA STRUMENTI (selettore iniziale / verbale / dotazioni)
+   ===================================================================== */
+function showTool(tool){
+  var mode = document.getElementById('modeSelectScreen');
+  var verbale = document.getElementById('mainForm');
+  var dotazioni = document.getElementById('dotazioniPage');
+  var genericHead = document.getElementById('genericHeaderBlock');
+  var verbaleHead = document.getElementById('verbaleHeaderBlock');
+  var dotazioniHead = document.getElementById('dotazioniHeaderBlock');
+  var verbaleBar = document.getElementById('verbaleActionBar');
+  var dotazioniBar = document.getElementById('dotazioniActionBar');
+
+  mode.classList.add('hidden');
+  verbale.classList.add('hidden');
+  dotazioni.classList.add('hidden');
+  genericHead.classList.add('hidden');
+  verbaleHead.classList.add('hidden');
+  dotazioniHead.classList.add('hidden');
+  verbaleBar.classList.add('hidden');
+  dotazioniBar.classList.add('hidden');
+
+  if(tool === 'verbale'){
+    verbale.classList.remove('hidden');
+    verbaleHead.classList.remove('hidden');
+    verbaleBar.classList.remove('hidden');
+  } else if(tool === 'dotazioni'){
+    dotazioni.classList.remove('hidden');
+    dotazioniHead.classList.remove('hidden');
+    dotazioniBar.classList.remove('hidden');
+  } else {
+    mode.classList.remove('hidden');
+    genericHead.classList.remove('hidden');
+  }
+  window.scrollTo({top:0, behavior:'instant' in window ? 'instant' : 'auto'});
+}
+
+document.getElementById('modeVerbaleBtn').addEventListener('click', function(){ showTool('verbale'); });
+document.getElementById('modeDotazioniBtn').addEventListener('click', function(){ showTool('dotazioni'); });
+document.getElementById('backFromVerbale').addEventListener('click', function(){ showTool('menu'); });
+document.getElementById('backFromDotazioni').addEventListener('click', function(){ showTool('menu'); });
+
+/* =====================================================================
+   CONTROLLO DOTAZIONI — dati estratti da Allegato V e Allegato V-bis
+   (Regolamento di attuazione del Codice della Nautica da Diporto)
+   ===================================================================== */
+
+// Colonne Allegato V (mezzi di salvataggio e dotazioni di sicurezza minime)
+var DOT_COLS_V = [
+  {key:'senza_limite', label:'Senza limite'},
+  {key:'50mi', label:'Entro 50 miglia'},
+  {key:'12mi', label:'Entro 12 miglia'},
+  {key:'6mi', label:'Entro 6 miglia'},
+  {key:'3mi', label:'Entro 3 miglia'},
+  {key:'1mi', label:'Entro 1 miglio'},
+  {key:'300m', label:'Entro 300 metri'},
+  {key:'acque_interne', label:'Acque interne'},
+  {key:'navi', label:'Navi'}
+];
+
+var DOT_NOTE_LETTER = {
+  a: "Dispositivi approvati in conformità al decreto del Ministero delle infrastrutture e dei trasporti 12 agosto 2002, n. 219.",
+  b: "Dispositivi approvati in conformità al decreto del Ministero delle infrastrutture e dei trasporti 02/03/2009, pubblicato nella Gazzetta Ufficiale – Serie Generale n. 85 dell'11/04/2009.",
+  c: "Dispositivi a marcatura CE in conformità alle norme ISO come emendate o, in alternativa, dispositivi a marcatura SOLAS MED (Timoncino) in conformità alle Norme IMO come emendate, come indicati dalla Circolare Serie Generale n. 80/2009 del 17/11/2009 del Comando generale del Corpo delle Capitanerie di porto.",
+  d: "Dispositivi certificati SOLAS MED (Timoncino) in conformità alle norme IMO come emendate.",
+  e: "Dispositivi certificati SOLAS MED (Timoncino) in conformità alle norme IMO come emendate, ovvero approvati secondo il decreto del Ministro dei trasporti e della navigazione 29 settembre 1999, n. 385.",
+  f: "Dispositivi certificati SOLAS MED (Timoncino) in conformità alle norme IMO come emendate, ovvero approvati secondo il DM del 29/9/1999, n. 387.",
+  g: "Dispositivi approvati secondo il DM del 29/9/1999, n. 388.",
+  h: "Conforme alla tabella D allegata al decreto del Ministero della Sanità 25 maggio 1988, n. 279, e successive modifiche.\nVedi anche Allegato al DM 10.03.2022 con riferimento alla Tab. A.",
+  i: "Dispositivi approvati secondo il DM del 29/9/1999, n. 386.",
+  l: "Dispositivi a marcatura CE in conformità alle norme ISO come emendate.",
+  m: "Apparati conformi al decreto legislativo 22 giugno 2016, n. 128 o al decreto del Presidente della Repubblica 20 dicembre 2017, n. 239."
+};
+
+var DOT_NOTE_NUM = {
+  1: "Il giubbotto di salvataggio è sempre indossato in caso di navigazione notturna in solitario.",
+  3: "La tabella di deviazione della bussola è aggiornata solo in caso di modifica degli apparati o di modifiche strutturali che producano differenziali magnetici.",
+  4: "Il fuoco a mano può essere sostituito con dispositivo a led se conforme alla normativa SOLAS MED in accordo alle norme IMO come emendate.",
+  5: "La bussola magnetica può essere sostituita con una bussola elettronica.",
+  6: "Le carte nautiche possono essere sostituite da cartografia elettronica conforme al decreto del Ministero delle infrastrutture e dei trasporti, Gazzetta Ufficiale – Serie Generale n. 193 del 19/08/2002.",
+  7: "L'E.P.I.R.B. può essere sostituito dal telefono satellitare dotato di dispositivo di invio di messaggio di soccorso all'I.M.R.C.C., conforme al D.Lgs. 22 giugno 2016, n. 128 o al D.P.R. 20 dicembre 2017, n. 239, rispondente alla norma EN 60945.",
+  8: "La campana può essere sostituita da un dispositivo sonoro portatile.",
+  9: "L'imbragatura di sicurezza da ponte può essere integrata con il giubbotto di salvataggio oppure con altro dispositivo di protezione individuale certificato.",
+  10: "Con decreto del Ministro delle infrastrutture e dei trasporti sono stabilite le caratteristiche e i requisiti di ulteriori dispositivi considerati equivalenti a quelli prescritti."
+};
+
+var DOT_GENERAL_NOTES = [
+  "Le unità che navigano oltre le 12 miglia dalla costa ed entro il limite dell'area di ricerca e soccorso nazionale (SAR), se munite di strumenti elettronici per la geo-localizzazione, possono avere a bordo i mezzi di salvataggio collettivi previsti per la navigazione entro le 12 miglia dalla costa (art. 54, comma 1, del D.M. 146/2008).",
+  "Le unità pneumatiche, comprese quelle a carena rigida, munite di marcatura CE di categoria A, B e C, conformi agli Standard UNI EN ISO 6185 parti 3 e 4, sono esentate dall'obbligo di dotarsi della zattera autogonfiabile in caso di navigazione entro dodici miglia dalla costa, se munite del kit di sopravvivenza previsto per il mezzo collettivo di salvataggio (art. 54, comma 2-bis, del D.M. 146/2008).",
+  "Il mezzo collettivo di salvataggio previsto per la navigazione entro le 12 miglia dalla costa può essere sostituito dal battello pneumatico di servizio munito di marcatura CE e conforme agli Standard UNI EN ISO 6185, purché unità pronta all'uso e varabile a mano, munita di dispositivo di risalita a bordo e di kit di sopravvivenza, in grado di imbarcare il numero di persone presenti a bordo, compreso l'equipaggio (art. 54, comma 2, del D.M. 146/2008).",
+  "Il giubbotto di salvataggio è identificato con il numero di iscrizione dell'unità (art. 53, comma 1-bis, del D.M. 146/2008).",
+  "I battelli di servizio, comprese le moto d'acqua, rientranti nella categoria dei natanti quando sono utilizzati entro 1 miglio dalla costa o dall'unità, ovunque si trovi, non hanno obbligo di dotazioni di sicurezza e di mezzi di salvataggio, fatti salvi i mezzi di salvataggio individuale (art. 55 del D.M. 146/2008)."
+];
+
+var ALLEGATO_V_MAIN = [
+  {name:"Zattera di salvataggio", suffix:"per tutte le persone a bordo", note:'a', cols:{senza_limite:'x','50mi':'x'}},
+  {name:"Zattera di salvataggio costiera", suffix:"per tutte le persone a bordo", note:'b', cols:{'12mi':'x'}},
+  {name:"Giubbotti di salvataggio almeno categoria 150", suffix:"per tutte le persone a bordo", note:'c', numNotes:[1], cols:{senza_limite:'x','50mi':'x','12mi':'x'}},
+  {name:"Giubbotti di salvataggio almeno categoria 100", suffix:"per tutte le persone a bordo", note:'c', numNotes:[1], cols:{'6mi':'x','3mi':'x','1mi':'x',acque_interne:'x'}},
+  {name:"Luce ad attivazione automatica", suffix:"montata sui giubbotti di salvataggio", note:'d', cols:{senza_limite:'x','50mi':'x','12mi':'x'}},
+  {name:"Salvagente anulare con cima", note:'e', cols:{senza_limite:'x','50mi':'x','12mi':'x','6mi':'x','3mi':'x',acque_interne:'x'}},
+  {name:"Boetta luminosa per salvagente", note:'d', cols:{senza_limite:'x','50mi':'x','12mi':'x','6mi':'x'}},
+  {name:"Boetta fumogena", note:'f', cols:{senza_limite:'x (2)','50mi':'x (2)','12mi':'x (2)','6mi':'x (2)','3mi':'x (1)'}},
+  {name:"Fuochi a mano a luce rossa", note:'f', numNotes:[4], cols:{senza_limite:'x (3)','50mi':'x (2)','12mi':'x (2)','6mi':'x (2)','3mi':'x (2)'}},
+  {name:"Razzi a paracadute a luce rossa", note:'f', cols:{senza_limite:'x (3)','50mi':'x (2)','12mi':'x (2)','6mi':'x (2)'}},
+  {name:"Bussola e tabelle di deviazione", suffix:"per le imbarcazioni", note:'g', numNotes:[3,5], cols:{senza_limite:'x','50mi':'x','12mi':'x'}},
+  {name:"Orologio", cols:{senza_limite:'x','50mi':'x','12mi':'x'}},
+  {name:"Barometro", cols:{senza_limite:'x','50mi':'x'}},
+  {name:"Binocolo", cols:{senza_limite:'x','50mi':'x'}},
+  {name:"Scandaglio elettronico o manuale fino a 20 m", cols:{senza_limite:'x','50mi':'x'}},
+  {name:"Tabella dei segnali visivi diurni e notturni (Colreg)", cols:{senza_limite:'x','50mi':'x','12mi':'x'}},
+  {name:"Carte nautiche della zona in cui si effettua la navigazione", numNotes:[6], cols:{senza_limite:'x','50mi':'x'}},
+  {name:"Strumenti da carteggio", cols:{senza_limite:'x','50mi':'x'}},
+  {name:"Cassetta di pronto soccorso", note:'h', cols:{senza_limite:'x','50mi':'x'}},
+  {name:"Fanali regolamentari (Colreg)", cols:{senza_limite:'x','50mi':'x','12mi':'x','6mi':'x','3mi':'x'}},
+  {name:"Pallone nero di fonda", suffix:"per le unità superiori a 7 metri", cols:{senza_limite:'x','50mi':'x','12mi':'x','6mi':'x','3mi':'x','1mi':'x'}},
+  {name:"Fischio e campana", suffix:"per le unità superiori a 12 metri", numNotes:[8], cols:{senza_limite:'x','50mi':'x','12mi':'x','6mi':'x','3mi':'x'}},
+  {name:"Strumento di radioposizionamento (GPS)", cols:{senza_limite:'x','50mi':'x'}},
+  {name:"Apparato VHF", note:'m', cols:{senza_limite:'x','50mi':'x','12mi':'x'}},
+  {name:"E.P.I.R.B. funzionante sulle frequenze 406 MHz e 121,5 MHz", note:'m', numNotes:[7], cols:{senza_limite:'x'}},
+  {name:"Riflettore radar", note:'i', cols:{senza_limite:'x','50mi':'x'}},
+  {name:"Pompa o altro attrezzo di esaurimento della sentina", cols:{senza_limite:'x','50mi':'x','12mi':'x','6mi':'x','3mi':'x','1mi':'x'}}
+];
+
+var ALLEGATO_V_VELA = [
+  {name:"Imbragatura di sicurezza da ponte con nastro di sicurezza (safety line ombelicale)", note:'l', numNotes:[9], cols:{senza_limite:'x (2)','50mi':'x (2)','12mi':'x (1)'}}
+];
+
+var ALLEGATO_VBIS_MAIN = [
+  {name:"Ancora", cols:{senza_limite:'x (2)','50mi':'x','12mi':'x','6mi':'x'}},
+  {name:"Cima idonea per il traino dell'unità", cols:{senza_limite:'x','50mi':'x','12mi':'x','6mi':'x'}},
+  {name:"Cime di ormeggio", cols:{senza_limite:'x (4)','50mi':'x (4)','12mi':'x (3)','6mi':'x (2)'}},
+  {name:"Parabordi", cols:{senza_limite:'x','50mi':'x','12mi':'x','6mi':'x'}},
+  {name:"Mezzo marinaio", cols:{senza_limite:'x','50mi':'x','12mi':'x'}},
+  {name:"Secchio", cols:{senza_limite:'x','50mi':'x','12mi':'x'}},
+  {name:"Torcia stagna", cols:{senza_limite:'x','50mi':'x','12mi':'x'}},
+  {name:"Coltello galleggiante", cols:{senza_limite:'x','50mi':'x','12mi':'x'}},
+  {name:"Coni di legno tenero per le prese a mare", cols:{senza_limite:'x','50mi':'x'}},
+  {name:"Attrezzi e parti di ricambio", cols:{senza_limite:'x','50mi':'x'}},
+  {name:"Tabella di stivaggio dell'equipaggiamento di sicurezza", cols:{senza_limite:'x','50mi':'x','12mi':'x'}},
+  {name:'Salvagente anulare aggiuntivo o sistema galleggiante di recupero "uomo a mare"', cols:{senza_limite:'x','50mi':'x','12mi':'x'}},
+  {name:"Bussola magnetica aggiuntiva (se a bordo c'è già una bussola elettronica)", cols:{senza_limite:'x'}},
+  {name:"VHF aggiuntivo, anche portatile", cols:{senza_limite:'x'}},
+  {name:"Sistema di allarme e/o localizzazione dell'uomo in mare", cols:{senza_limite:'x','50mi':'x'}}
+];
+
+var ALLEGATO_VBIS_VELA = [
+  {name:"Antenna VHF di riserva", cols:{senza_limite:'x'}},
+  {name:"Cesoie", cols:{senza_limite:'x'}},
+  {name:"Banzigo per albero", cols:{senza_limite:'x'}},
+  {name:"Set per riparazione vele", cols:{senza_limite:'x'}},
+  {name:"Ancora galleggiante", cols:{senza_limite:'x'}}
+];
+
+var ALLEGATO_VBIS_VELA = [
+  {name:"Antenna VHF di riserva", cols:{senza_limite:'x'}},
+  {name:"Cesoie", cols:{senza_limite:'x'}},
+  {name:"Banzigo per albero", cols:{senza_limite:'x'}},
+  {name:"Set per riparazione vele", cols:{senza_limite:'x'}},
+  {name:"Ancora galleggiante", cols:{senza_limite:'x'}}
+];
+
+/* ---- Allegato VIII e VIII-bis (unità adibite a noleggio, art. 88 D.M. 146/2008) ---- */
+/* L'Allegato VIII-bis (raccomandate per il noleggio) coincide nei contenuti con l'Allegato V-bis:
+   si riutilizzano quindi ALLEGATO_VBIS_MAIN e ALLEGATO_VBIS_VELA anche per il noleggio. */
+
+var ALLEGATO_VIII_MAIN = [
+  {name:"Zattera di salvataggio", suffix:"per tutte le persone che l'unità è in grado di trasportare, più l'equipaggio", note:'a', cols:{navi:'x (2)', senza_limite:'x'}},
+  {name:"Zattera di salvataggio costiera", suffix:"per tutte le persone che l'unità è in grado di trasportare, più l'equipaggio", note:'b', cols:{'12mi':'x','6mi':'x'}},
+  {name:"Giubbotti di salvataggio almeno categoria 150", suffix:"per tutte le persone che l'unità è in grado di trasportare, più l'equipaggio", note:'c', numNotes:[1], cols:{navi:'x', senza_limite:'x', '12mi':'x','6mi':'x'}},
+  {name:"Giubbotti di salvataggio almeno categoria 100", suffix:"per tutte le persone che l'unità è in grado di trasportare, più l'equipaggio", note:'c', numNotes:[1], cols:{'3mi':'x', acque_interne:'x'}},
+  {name:"Luce ad attivazione automatica", suffix:"montata sui giubbotti di salvataggio", note:'d', cols:{navi:'x', senza_limite:'x', '12mi':'x'}},
+  {name:"Salvagente anulare con cima", note:'e', cols:{navi:'x (2)', senza_limite:'x', '12mi':'x','6mi':'x','3mi':'x', acque_interne:'x'}},
+  {name:"Boetta luminosa per salvagente", note:'d', cols:{senza_limite:'x', '12mi':'x','6mi':'x'}},
+  {name:"Boetta fumogena", note:'f', cols:{navi:'x (4)', senza_limite:'x (2)', '12mi':'x (2)','6mi':'x (2)','3mi':'x (2)', acque_interne:'x (2)'}},
+  {name:"Fuochi a mano a luce rossa", note:'f', numNotes:[3], cols:{navi:'x (4)', senza_limite:'x (3)', '12mi':'x (3)','6mi':'x (2)','3mi':'x (2)', acque_interne:'x (2)'}},
+  {name:"Razzi a paracadute a luce rossa", note:'f', cols:{navi:'x (4)', senza_limite:'x (3)', '12mi':'x (3)','6mi':'x (2)','3mi':'x (2)', acque_interne:'x (2)'}},
+  {name:"Bussola e tabelle di deviazione", note:'g', numNotes:[2,4], cols:{navi:'x', senza_limite:'x', '12mi':'x','6mi':'x'}},
+  {name:"Orologio", cols:{navi:'x', senza_limite:'x', '12mi':'x'}},
+  {name:"Barometro", cols:{navi:'x', senza_limite:'x', '12mi':'x'}},
+  {name:"Binocolo", cols:{navi:'x', senza_limite:'x', '12mi':'x'}},
+  {name:"Scandaglio elettronico o manuale fino a 25 m", cols:{navi:'x', senza_limite:'x', '12mi':'x','6mi':'x','3mi':'x', acque_interne:'x'}},
+  {name:"Tabella dei segnali visivi diurni e notturni (Colreg)", cols:{navi:'x', senza_limite:'x', '12mi':'x'}},
+  {name:"Carte nautiche della zona in cui si effettua la navigazione", numNotes:[6], cols:{navi:'x', senza_limite:'x', '12mi':'x'}},
+  {name:"Strumenti da carteggio per l'uso delle carte nautiche", numNotes:[5], cols:{navi:'x', senza_limite:'x', '12mi':'x'}},
+  {name:"Cassetta di pronto soccorso", note:'h', cols:{navi:'x', senza_limite:'x', '12mi':'x','6mi':'x'}},
+  {name:"Fanali regolamentari (Colreg)", cols:{navi:'x', senza_limite:'x', '12mi':'x','6mi':'x','3mi':'x', acque_interne:'x'}},
+  {name:"Pallone nero di fonda", suffix:"per unità superiori a 7 metri", cols:{navi:'x', senza_limite:'x', '12mi':'x','6mi':'x','3mi':'x'}},
+  {name:"Apparecchi di segnalazione sonora", cols:{navi:'x', senza_limite:'x', '12mi':'x','6mi':'x','3mi':'x', acque_interne:'x'}},
+  {name:"Strumento di radioposizionamento (GPS)", cols:{navi:'x', senza_limite:'x', '12mi':'x'}},
+  {name:"Apparato VHF-DSC", note:'m', numNotes:[12], cols:{navi:'x', senza_limite:'x', '12mi':'x'}},
+  {name:"Apparato VHF", note:'m', cols:{'6mi':'x','3mi':'x', acque_interne:'x'}},
+  {name:"SSB", note:'m', cols:{navi:'x'}},
+  {name:"SSB o telefono satellitare", note:'n', numNotes:[7], cols:{senza_limite:'x'}},
+  {name:"E.P.I.R.B. funzionante sulle frequenze 406 MHz e 121,5 MHz", note:'m', numNotes:[7], cols:{navi:'x', senza_limite:'x'}},
+  {name:"Riflettore radar", note:'i', cols:{navi:'x', senza_limite:'x', '12mi':'x','6mi':'x'}},
+  {name:"Pompa o altro attrezzo di esaurimento della sentina", cols:{navi:'x', senza_limite:'x', '12mi':'x','6mi':'x','3mi':'x', acque_interne:'x'}}
+];
+
+var ALLEGATO_VIII_VELA = [
+  {name:"Imbragatura di sicurezza da ponte con nastro di sicurezza (safety line ombelicale)", note:'l', numNotes:[8], cols:{senza_limite:'x (2)', '50mi':'x (2)', '12mi':'x (1)'}}
+];
+
+var DOT_NOTE_LETTER_VIII = {
+  a: "Le zattere di salvataggio sono approvate in conformità al DM del 12/08/2002, n. 219, o certificate SOLAS MED (Timoncino) in conformità alle norme IMO come emendate.",
+  b: "Le zattere di salvataggio sono approvate in conformità al DM del 02/03/2009.",
+  c: "I giubbotti di salvataggio per natanti e imbarcazioni sono dispositivi a marcatura CE in conformità alle norme ISO come emendate o, in alternativa, dispositivi a marcatura SOLAS MED (Timoncino) in conformità alle Norme IMO come emendate, come indicati dalla lettera circolare Serie Generale n. 80/2009 del Comando generale del Corpo delle Capitanerie di porto, del 17/11/2009. I giubbotti di salvataggio per le navi sono dispositivi a marcatura SOLAS MED (Timoncino) in conformità alle Norme IMO come emendate.",
+  d: "Le luci ad attivazione automatica per i giubbotti e la boetta luminosa per i salvagenti sono dispositivi certificati SOLAS MED (Timoncino) in conformità alle norme IMO come emendate.",
+  e: "Il salvagente anulare è un dispositivo certificato SOLAS MED (Timoncino) in conformità alle norme IMO come emendate, ovvero approvato secondo il DM del 29/9/1999, n. 385.",
+  f: "I razzi, i fuochi a mano e le boette fumogene sono certificati SOLAS MED (Timoncino) in conformità alle norme IMO come emendate, ovvero approvati secondo il DM del 29/9/1999, n. 387.",
+  g: "Le bussole magnetiche sono disciplinate con il decreto ministeriale 29 settembre 1999, n. 388 e successive modifiche.",
+  h: "Il contenuto della cassetta di pronto soccorso è determinato dalla tabella A allegata al decreto del Ministero della Sanità del 25 maggio 1988, n. 279, e successive modifiche.\nVedi anche Allegato al DM 10.03.2022 con riferimento alla Tab. A.",
+  i: "Dispositivi approvati secondo il DM del 29/9/1999, n. 386.",
+  l: "Dispositivi a marcatura CE in conformità alle norme ISO come emendate.",
+  m: "Apparati conformi al decreto legislativo 22 giugno 2016, n. 128 o al decreto del Presidente della Repubblica 20 dicembre 2017, n. 239.",
+  n: "Telefono satellitare dotato di dispositivo di invio di messaggio di soccorso al Comando generale del Corpo delle Capitanerie di porto – Guardia costiera, conforme al decreto legislativo 22 giugno 2016, n. 128 o al decreto del Presidente della Repubblica 20 dicembre 2017, n. 239, rispondente comunque alla norma EN 60945."
+};
+
+var DOT_NOTE_NUM_VIII = {
+  1: "I mezzi collettivi e individuali di salvataggio sono individuati per tutte le persone che l'unità è abilitata a trasportare, fino al massimo di 12, più l'equipaggio.",
+  2: "La tabella di deviazione della bussola è aggiornata solo in caso di modifica degli apparati o di modifiche strutturali che producano differenziali magnetici.",
+  3: "Il fuoco a mano può essere sostituito con dispositivo a led se conforme alla normativa SOLAS MED in accordo alle norme IMO come emendate.",
+  4: "La bussola magnetica può essere sostituita con una bussola elettronica.",
+  5: "Gli strumenti da carteggio consistono in un compasso, due squadrette, una riga o una parallela.",
+  6: "Le carte nautiche possono essere sostituite dalla cartografia elettronica conforme al decreto del Comandante generale del Corpo delle Capitanerie di porto 10 luglio 2002, Gazzetta Ufficiale – Serie generale n. 193 del 19/08/2002.",
+  7: "L'E.P.I.R.B. può essere sostituito dal telefono satellitare dotato di dispositivo di invio di messaggio di soccorso all'I.M.R.C.C., conforme al D.Lgs. 22 giugno 2016, n. 128 o al D.P.R. 20 dicembre 2017, n. 239, rispondente alla norma EN 60945.",
+  8: "L'imbragatura di sicurezza da ponte può essere integrata con il giubbotto di salvataggio oppure con altro dispositivo individuale certificato.",
+  10: "Per le imbarcazioni e i natanti marcati CE, i dispositivi antincendio sono conformi all'allegato II del D.Lgs. 18 luglio 2005, n. 171; per le imbarcazioni e i natanti non marcati CE, i dispositivi antincendio sono conformi all'allegato V, lettera e), del D.M. 146/2008.",
+  11: "Con decreto del Ministro delle infrastrutture e dei trasporti sono stabilite le caratteristiche e i requisiti di ulteriori dispositivi considerati equivalenti a quelli prescritti.",
+  12: "L'apparato VHF con DSC deve essere collegato all'apparato GPS, qualora non integrato."
+};
+
+var DOT_GENERAL_NOTES_VIII = [
+  "Per le unità adibite a noleggio, i proprietari o armatori possono avere a bordo i mezzi di salvataggio e le dotazioni di sicurezza previsti per la navigazione in acque interne, o entro 3, 6 o 12 miglia dalla costa, se dichiarano di effettuare la navigazione entro tali limiti. La dichiarazione di autolimitazione, in carta semplice, è annotata sul Certificato di Idoneità (art. 88, comma 2, D.M. 146/2008).",
+  "In assenza di dichiarazione di autolimitazione, le dotazioni sono individuate in base all'abilitazione risultante dalla marcatura CE, dalla licenza di navigazione o dall'iscrizione dell'unità, secondo quanto verificato in questa sezione.",
+  "I mezzi collettivi e individuali di salvataggio sono individuati per tutte le persone che l'unità è abilitata a trasportare, fino al massimo di 12, più l'equipaggio (punto 1, Allegato VIII)."
+];
+
+/* ---- Cassetta di pronto soccorso: contenuto Tab. A (Allegato 2, DM 10.03.2022) ----
+   Elenco dei medicinali con quantità Tab. A diversa da zero, estratti dalla sezione
+   "1 - MEDICINALI" della tabella dotazioni. Voci con Tab. A = 0 sono escluse. */
+var CASSETTA_PS_TAB_A = [
+  { gruppo:"Antidoti per stupefacenti oppiacei", nome:"Naloxone (V03AB15)", qty:3 },
+  { gruppo:"Analgesici, antipiretici e antinfiammatori", nome:"Paracetamolo (N02BE01)", qty:12 },
+  { gruppo:"Analgesici, antipiretici e antinfiammatori", nome:"Acido acetilsalicilico (N02BA01)", qty:12 },
+  { gruppo:"Analgesici, antipiretici e antinfiammatori", nome:"Noramidopirina/Metamizolo (N02BB02)", qty:1 },
+  { gruppo:"Analgesici, antipiretici e antinfiammatori", nome:"Ibuprofene (M01AE01)", qty:12 },
+  { gruppo:"Analgesici, antipiretici e antinfiammatori", nome:"Diclofenac sodico (M01AB05)", qty:5 },
+  { gruppo:"Antispastici", nome:"Butilbromuro di ioscina, oppure Floroglucinolo/Meglucinolo (A03BB01N)", qty:20 },
+  { gruppo:"Antiasmatici", nome:"A base di beta stimolanti — aerosol pressurizzato", qty:1 },
+  { gruppo:"Antidiarroici e reidratanti", nome:"A base di loperamide (A07DA03)", qty:15 },
+  { gruppo:"Antiemetici", nome:"Metoclopramide, cpr (A03FA01)", qty:24 },
+  { gruppo:"Antiemetici", nome:"Metoclopramide, fiale (A03FA01)", qty:5 },
+  { gruppo:"Antiemetici", nome:"Domperidone (A03FA03)", qty:6 },
+  { gruppo:"Antiemorragici", nome:"A base di acido tranexamico (B02AA02)", qty:5 },
+  { gruppo:"Emostatici uterini (**)", nome:"Metilergometrina, fiale (G02AB01)", qty:3 },
+  { gruppo:"Emostatici uterini (**)", nome:"Metilergometrina, cpr (G02AB01)", qty:15 },
+  { gruppo:"Antipertensivi e coronarodilatatori", nome:"Atenololo", qty:10 },
+  { gruppo:"Antiallergici antishock", nome:"Levocetirizina (R06AE09)", qty:30 },
+  { gruppo:"Antiallergici antishock", nome:"A base di desclorfeniramina maleato, sciroppo (R06AB02)", qty:1 },
+  { gruppo:"Antiallergici antishock", nome:"Metilprednisolone (H02AB04)", qty:10 },
+  { gruppo:"Antiallergici antishock", nome:"Idrocortisone succinato", qty:2 },
+  { gruppo:"Antiallergici antishock", nome:"Idrocortisone acetato", qty:1 },
+  { gruppo:"Antiallergici antishock", nome:"Prednisolone (D07EA01)", qty:10 },
+  { gruppo:"Antistaminici", nome:"Levocetirizina o similari", qty:20 },
+  { gruppo:"Decontratturanti", nome:"Tiocolchicoside", qty:5 },
+  { gruppo:"Decontratturanti", nome:"Cerotti termici", qty:5 },
+  { gruppo:"Diuretici", nome:"Furosemide, fiale", qty:1 },
+  { gruppo:"Sedativi e neurolettici", nome:"Diazepam", qty:1 },
+  { gruppo:"Sedativi e neurolettici", nome:"Diazepam o Midazolam o Lorazepam", qty:1 },
+  { gruppo:"Antichinetosi", nome:"Betaistina dicloridrato o similari", qty:40 },
+  { gruppo:"Antichinetosi", nome:"Cerotti transdermici di scopolamina", qty:5 },
+  { gruppo:"Medicinali per uso esterno", nome:"Collirio anestetico", qty:1 },
+  { gruppo:"Medicinali per uso esterno", nome:"Gocce odontalgiche", qty:2 },
+  { gruppo:"Medicinali per uso esterno", nome:"Pomata antiustione", qty:1 },
+  { gruppo:"Medicinali per uso esterno", nome:"Pomata antinfiammatoria non steroidea per uso topico (M02AA)", qty:1 },
+  { gruppo:"Antisettici disinfettanti biocidi", nome:"Ipoclorito di sodio (D08AX07)", qty:2 },
+  { gruppo:"Antisettici disinfettanti biocidi", nome:"Benzalconio cloruro (S01AX)", qty:3 },
+  { gruppo:"Antisettici disinfettanti biocidi", nome:"Iodopovidone (D08AG02)", qty:1 },
+  { gruppo:"Antisettici disinfettanti biocidi", nome:"Clorexidina (A01AB03)", qty:1 },
+  { gruppo:"Antisettici disinfettanti biocidi", nome:"Acqua ossigenata (D08AX01)", qty:1 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Pallone autoespansibile di AMBU adulto", qty:1 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Cannula di Guedel adulto, misura 3", qty:1 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Cannula di Guedel adulto, misura 2", qty:1 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Cannula di Guedel pediatrico, misura 0", qty:1 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Maschera AMBU adulto", qty:1 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Maschera AMBU bambino", qty:1 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Pulsossimetro (saturimetro) portatile da dito", qty:5 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Siringa sterile, 10 ml 21 G", qty:10 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Laccio emostatico", qty:1 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Laccio emostatico di Esmark o torniquette", qty:1 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Benda garza T12/8 orlata, h 10 cm", qty:10 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Borsa freddo istantanea", qty:2 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Borsa caldo istantanea", qty:1 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Cerotti telati, cm 10", qty:5 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Coperta isotermica", qty:"(*)" },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Cotone idrofilo, gr 500", qty:2 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Steri-strip sterile, 6 mm x 3,8 cm", qty:5 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Forbice per taglio abiti", qty:1 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Garza sterile T12/8 16 strati, cm 18x40", qty:10 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Garze non sterili", qty:10 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Guanti latex free non sterili, L", qty:10 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Guanti latex free non sterili, M", qty:20 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Mascherine chirurgiche monouso", qty:10 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Saturimetro", qty:"1 (*)" },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Scatola portarifiuti a rischio taglienti", qty:1 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Sfigmomanometro", qty:1 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Fonendoscopio", qty:1 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Stecche o presidi per immobilizzazione", qty:2 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Termometro clinico", qty:1 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Manuale di Pronto Soccorso in lingua italiana e \"International Medical Guide for Ships\" (WHO)", qty:1 },
+  { gruppo:"Kit per medicazione e chirurgia", nome:"Test rapido per la malaria", qty:3 },
+  { gruppo:"Insetticidi", nome:"Insetticidi liquidi", qty:"(quantità/tipologia secondo DVR)" },
+  { gruppo:"Insetticidi", nome:"Insetticidi in polvere", qty:"(quantità/tipologia secondo DVR)" },
+  { gruppo:"Composti per disinfettare l'acqua", nome:"Ipoclorito di sodio (soluzione)", qty:"(secondo indicazioni del produttore)" }
+];
+
+/* Riferimenti normativi ufficiali (Gazzetta Ufficiale — fonte primaria, permanente, senza login) */
+var LINK_DM_146_2008_MULTIVIGENTE = "https://www.normattiva.it/atto/caricaDettaglioAtto?atto.dataPubblicazioneGazzetta=2008-09-22&atto.codiceRedazionale=008G0166&tipoDettaglio=multivigenza&qId=";
+var LINK_DM_10_03_2022 = "https://www.gazzettaufficiale.it/atto/serie_generale/caricaDettaglioAtto/originario?atto.dataPubblicazioneGazzetta=2022-05-10&atto.codiceRedazionale=22A02787&elenco30giorni=false";
+
+function dotBuildCassettaPSNaveNote(){
+  return '<div class="dot-item-wrap dot-item-alt"><div class="dot-note-details" style="padding:8px 4px 4px;">' +
+    '<div class="dot-note-detail" style="white-space:normal;">' +
+      '<strong>Attenzione — unità di tipo Nave.</strong> Il DM 10.03.2022 suddivide le dotazioni sanitarie in quattro tabelle ' +
+      '(A, B, C, D) in base alla tipologia/categoria di navigazione, non in base al tipo di unità. Per le Navi il contenuto ' +
+      'della cassetta di pronto soccorso <strong>non coincide necessariamente con la Tab. A</strong> qui riportata (verificata ' +
+      'solo per imbarcazioni e natanti): è necessario individuare la tabella (A, B, C o D) effettivamente applicabile in base alla ' +
+      'categoria di navigazione della nave, consultando il DM 10.03.2022 e il relativo Allegato 2 per esteso.<br><br>' +
+      '<a href="' + LINK_DM_10_03_2022 + '" target="_blank" rel="noopener">Apri il DM 10.03.2022 sulla Gazzetta Ufficiale ↗</a>' +
+    '</div>' +
+  '</div></div>';
+}
+
+function dotBuildCassettaPSChecklist(){
+  var html = '<div class="dot-item-wrap dot-item-alt">' +
+    '<div class="dot-item">' +
+      '<label class="dot-item-check" for="cassettaPSToggle">' +
+        '<input type="checkbox" class="dot-checkbox" id="cassettaPSToggle">' +
+        '<span class="dot-item-label">▸ Contenuto della cassetta (Tab. A, DM 10.03.2022)</span>' +
+      '</label>' +
+    '</div>' +
+    '<div class="dot-subchecklist hidden" id="cassettaPSChecklist">';
+  var lastGruppo = null;
+  CASSETTA_PS_TAB_A.forEach(function(m, i){
+    if(m.gruppo !== lastGruppo){
+      html += '<div class="dot-subgroup-title">' + dotEscapeHtml(m.gruppo) + '</div>';
+      lastGruppo = m.gruppo;
+    }
+    html += '<div class="dot-item dot-subitem">' +
+      '<label class="dot-item-check" for="cassettaPS_' + i + '">' +
+        '<input type="checkbox" class="dot-checkbox" id="cassettaPS_' + i + '">' +
+        '<span>' + dotEscapeHtml(m.nome) + '</span>' +
+      '</label>' +
+      '<span class="dot-item-qty">Tab. A: ' + dotEscapeHtml(String(m.qty)) + '</span>' +
+    '</div>';
+  });
+  html += '</div></div>';
+  return html;
+}
+
+function dotDistanceToColumnV(nm, acqueInterne){
+  if(acqueInterne) return 'acque_interne';
+  if(nm <= 300/1852) return '300m';
+  if(nm <= 1) return '1mi';
+  if(nm <= 3) return '3mi';
+  if(nm <= 6) return '6mi';
+  if(nm <= 12) return '12mi';
+  if(nm <= 50) return '50mi';
+  return 'senza_limite';
+}
+function dotDistanceToColumnVbis(nm, acqueInterne){
+  if(acqueInterne) return null; // l'Allegato V-bis non prevede la categoria "acque interne"
+  if(nm <= 6) return '6mi';
+  if(nm <= 12) return '12mi';
+  if(nm <= 50) return '50mi';
+  return 'senza_limite';
+}
+function dotDistanceToColumnVIII(nm, acqueInterne){
+  if(acqueInterne) return 'acque_interne';
+  if(nm <= 3) return '3mi';
+  if(nm <= 6) return '6mi';
+  if(nm <= 12) return '12mi';
+  return 'senza_limite';
+}
+function dotColVToVbisColumn(colV){
+  if(colV === '6mi' || colV === '12mi' || colV === '50mi' || colV === 'senza_limite') return colV;
+  return null; // acque_interne e 3mi: l'Allegato (VIII-)bis non definisce raccomandazioni a queste fasce
+}
+
+function dotBuildItemsForColumn(list, colKey){
+  var out = [];
+  list.forEach(function(item){
+    if(item.cols[colKey]){
+      out.push({ name:item.name, suffix:item.suffix, qty:item.cols[colKey], note:item.note, numNotes:item.numNotes || [] });
+    }
+  });
+  return out;
+}
+
+function dotEscapeHtml(s){
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function dotNoteDetailHtml(uid, key, text, isLetter){
+  return '<div class="dot-note-detail hidden" id="ndetail_' + uid + '">' +
+    '<strong>' + (isLetter ? '(' + key + ')' : key + '.') + '</strong> ' + dotEscapeHtml(text) +
+  '</div>';
+}
+function dotRenderItem(it, uid, noteMaps){
+  noteMaps = noteMaps || { letter: DOT_NOTE_LETTER, num: DOT_NOTE_NUM };
+  var tags = '';
+  var details = '';
+  if(it.note){
+    var tid = uid + '_l';
+    tags += '<button type="button" class="dot-note-tag" data-target="ndetail_' + tid + '">' + it.note + '</button>';
+    details += dotNoteDetailHtml(tid, it.note, noteMaps.letter[it.note] || '', true);
+  }
+  (it.numNotes || []).forEach(function(n){
+    var tid = uid + '_n' + n;
+    tags += '<button type="button" class="dot-note-tag" data-target="ndetail_' + tid + '">' + n + '</button>';
+    details += dotNoteDetailHtml(tid, n, noteMaps.num[n] || '', false);
+  });
+  var label = dotEscapeHtml(it.name) + tags + (it.suffix ? ' <span class="hint" style="display:inline">(' + dotEscapeHtml(it.suffix) + ')</span>' : '');
+  var qtyMatch = String(it.qty).match(/\((\d+)\)/);
+  var qtyLabel = qtyMatch ? ('n. ' + qtyMatch[1]) : '';
+  var checkboxId = 'chk_' + uid;
+  return '<div class="dot-item-wrap">' +
+    '<div class="dot-item">' +
+      '<label class="dot-item-check" for="' + checkboxId + '">' +
+        '<input type="checkbox" class="dot-checkbox" id="' + checkboxId + '">' +
+        '<span class="dot-item-label">' + label + '</span>' +
+      '</label>' +
+      (qtyLabel ? '<span class="dot-item-qty">' + qtyLabel + '</span>' : '') +
+    '</div>' +
+    (details ? '<div class="dot-note-details">' + details + '</div>' : '') +
+  '</div>';
+}
+function dotRenderList(items, idPrefix, extraAfterName, extraHtml, noteMaps){
+  if(!items.length){
+    return '<div class="dot-empty">Nessuna dotazione specifica prevista per questa fascia di distanza.</div>';
+  }
+  // extraAfterName può essere una stringa singola (retrocompatibilità) o una mappa {nome: html}
+  var injections = {};
+  if(typeof extraAfterName === 'string' && extraAfterName){
+    injections[extraAfterName] = extraHtml;
+  } else if(extraAfterName && typeof extraAfterName === 'object'){
+    injections = extraAfterName;
+  }
+  return items.map(function(it, idx){
+    var rowHtml = dotRenderItem(it, idPrefix + '_' + idx, noteMaps);
+    if(injections[it.name]){
+      rowHtml += injections[it.name];
+    }
+    return rowHtml;
+  }).join('');
+}
+function dotWireChecklist(container){
+
+  container.querySelectorAll('input.dot-checkbox').forEach(function(cb){
+    cb.addEventListener('change', function(){
+      var row = cb.closest('.dot-item');
+      if(row) row.classList.toggle('dot-checked', cb.checked);
+    });
+  });
+  container.querySelectorAll('.dot-note-tag').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var target = document.getElementById(btn.dataset.target);
+      if(target) target.classList.toggle('hidden');
+    });
+  });
+}
+
+/* --------- Estintori (Allegato V, lett. E) --------- */
+var DOT_ESTINTORI_NOTES = [
+  "Nelle tabelle, il numero che precede la lettera B indica la capacità estinguente dell'estintore. A un numero più alto corrisponde una maggiore capacità estinguente; la capacità indicata nelle tabelle è la minima richiesta.",
+  "La lettera B indica la designazione della classe di fuoco che l'estintore è idoneo a spegnere.",
+  "Sulle unità da diporto possono essere sistemati anche estintori appartenenti alle classi di fuoco A o C, purché omologati anche per classe di fuoco B.",
+  "Note esplicative circolare serie III n. 80 del 30 giugno 1989 dell'ex Direzione generale per la navigazione e il traffico marittimo.",
+  "Per le unità marcate CE gli estintori sono già collocati a bordo ed indicati nel manuale del proprietario.",
+  "La verifica periodica degli estintori non è richiesta. Il controllo consiste nell'accertamento del buono stato di conservazione; l'indicatore di pressione, quando esiste, deve essere nella posizione di carico (zona verde)."
+];
+
+function dotKw(value, unit){
+  if(unit === 'cv') return value * 0.735499;
+  if(unit === 'hp') return value * 0.745700;
+  return value;
+}
+
+function dotEstintoriNatante(kw){
+  var cap = kw <= 18.4 ? '13 B' : (kw <= 147 ? '21 B' : '34 B');
+  return [{ loc:'Dotazione unica a bordo', qty:1, cap:cap }];
+}
+
+function dotEstintoriImbarcazione(kw){
+  if(kw <= 18.4){
+    return { plancia:null, motore:null, altriLocali:null };
+  }
+  var motore;
+  if(kw <= 74) motore = [{qty:1, cap:'21 B'}];
+  else if(kw <= 147) motore = [{qty:2, cap:'13 B'}];
+  else if(kw <= 294) motore = [{qty:1, cap:'21 B'},{qty:1, cap:'13 B'}];
+  else if(kw <= 368) motore = [{qty:1, cap:'34 B'},{qty:1, cap:'21 B'}];
+  else motore = [{qty:2, cap:'34 B'}];
+  return {
+    plancia: [{qty:1, cap:'13 B'}],
+    motore: motore,
+    altriLocali: [{qty:1, cap:'13 B'}]
+  };
+}
+
+function dotRenderCustomRow(name, suffix, qtyLabel, notesArr, uid){
+  var tags = '';
+  var details = '';
+  (notesArr || []).forEach(function(nt){
+    var tid = uid + '_' + nt.key;
+    tags += '<button type="button" class="dot-note-tag" data-target="ndetail_' + tid + '">' + dotEscapeHtml(String(nt.key)) + '</button>';
+    details += dotNoteDetailHtml(tid, nt.key, nt.text, nt.isLetter);
+  });
+  var label = dotEscapeHtml(name) + tags + (suffix ? ' <span class="hint" style="display:inline">(' + dotEscapeHtml(suffix) + ')</span>' : '');
+  var checkboxId = 'chk_' + uid;
+  return '<div class="dot-item-wrap">' +
+    '<div class="dot-item">' +
+      '<label class="dot-item-check" for="' + checkboxId + '">' +
+        '<input type="checkbox" class="dot-checkbox" id="' + checkboxId + '">' +
+        '<span class="dot-item-label">' + label + '</span>' +
+      '</label>' +
+      (qtyLabel ? '<span class="dot-item-qty">' + dotEscapeHtml(qtyLabel) + '</span>' : '') +
+    '</div>' +
+    (details ? '<div class="dot-note-details">' + details + '</div>' : '') +
+  '</div>';
+}
+function dotFmtQtyCap(list){
+  if(!list) return 'Nessun estintore specificamente richiesto in questa posizione.';
+  return list.map(function(x){ return x.qty + ' da ' + x.cap; }).join(' e ');
+}
+
+document.getElementById('resetDotazioniBtn').addEventListener('click', function(){
+  if(!confirm('Vuoi cancellare tutti i dati inseriti e iniziare un nuovo controllo dotazioni?')) return;
+  var page = document.getElementById('dotazioniPage');
+
+  page.querySelectorAll('input[type=text], input[type=number]').forEach(function(el){ el.value = ''; });
+  page.querySelectorAll('input[type=checkbox]').forEach(function(el){ el.checked = false; });
+  page.querySelectorAll('select').forEach(function(el){ el.selectedIndex = 0; });
+  page.querySelectorAll('.toggle-opt.active').forEach(function(el){
+    el.classList.remove('active');
+    var input = el.querySelector('input');
+    if(input) input.checked = false;
+  });
+
+  function activateDefault(groupId, val){
+    var opt = document.querySelector('#' + groupId + ' .toggle-opt[data-val="' + val + '"]');
+    if(!opt) return;
+    opt.classList.add('active');
+    var input = opt.querySelector('input');
+    if(input) input.checked = true;
+  }
+  activateDefault('dTipoUnitaGroup', 'Imbarcazione');
+  activateDefault('dAndaturaGroup', 'Motore');
+  activateDefault('dMarcaturaCEGroup', 'si');
+  activateDefault('dAutolimitazioneGroup', 'no');
+
+  document.getElementById('dotazioniResult').innerHTML = '';
+  document.getElementById('dEquipaggioMinimoWarning').classList.add('hidden');
+  document.getElementById('dEquipaggioMinimoWarning').textContent = '';
+
+  updateCategoriaVisibility();
+  updateTipoUnitaFieldsVisibility();
+  updateDSarGeoVisibility();
+  updatePneumaticaEsenteVisibility();
+  updateNoleggioVisibility();
+
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+
+function dotClearValidation(){
+  document.querySelectorAll('#dotazioniPage .invalid').forEach(function(el){ el.classList.remove('invalid'); });
+  var msg = document.getElementById('dotazioniValidationMsg');
+  msg.classList.remove('show');
+  msg.textContent = '';
+}
+
+function dotShowValidationError(elOrGroupId, message){
+  dotClearValidation();
+  var el = document.getElementById(elOrGroupId);
+  if(el){
+    el.classList.add('invalid');
+    el.scrollIntoView({behavior:'smooth', block:'center'});
+    if(typeof el.focus === 'function') el.focus();
+  }
+  var msg = document.getElementById('dotazioniValidationMsg');
+  msg.textContent = message;
+  msg.classList.add('show');
+}
+
+/* Verifica che tutti i campi necessari allo scenario corrente siano stati compilati.
+   Restituisce null se tutto ok, altrimenti {elId, message} del primo campo mancante. */
+function dotValidate(){
+  var categoria = document.getElementById('d_categoria').value;
+  var tipoUnita = document.querySelector('input[name=dTipoUnita]:checked');
+  tipoUnita = tipoUnita ? tipoUnita.value : 'Imbarcazione';
+  var marcaturaCE = document.querySelector('input[name=dMarcaturaCE]:checked');
+  marcaturaCE = marcaturaCE ? marcaturaCE.value : 'si';
+
+  var passRaw = document.getElementById('d_passeggeri').value.trim();
+  if(!passRaw){
+    return { elId:'d_passeggeri', message:'Inserisci il numero di passeggeri.' };
+  }
+  var passNum = parseItNum(passRaw);
+  if(isNaN(passNum) || passNum < 0){
+    return { elId:'d_passeggeri', message:'Il numero di passeggeri inserito non è valido.' };
+  }
+
+  var equipRaw = document.getElementById('d_equipaggio').value.trim();
+  if(!equipRaw){
+    return { elId:'d_equipaggio', message:'Inserisci il numero di equipaggio.' };
+  }
+  var equipNum = parseItNum(equipRaw);
+  if(isNaN(equipNum) || equipNum < 0){
+    return { elId:'d_equipaggio', message:'Il numero di equipaggio inserito non è valido.' };
+  }
+
+  if(tipoUnita !== 'Nave'){
+    var lftRawCheck = document.getElementById('d_lft').value.trim();
+    if(!lftRawCheck){
+      return { elId:'d_lft', message:'Inserisci la lunghezza fuori tutto (LFT).' };
+    }
+    var lftNumCheck = parseItNum(lftRawCheck);
+    if(isNaN(lftNumCheck) || lftNumCheck < 0){
+      return { elId:'d_lft', message:'La lunghezza fuori tutto (LFT) inserita non è valida.' };
+    }
+  }
+
+  if(marcaturaCE === 'no'){
+    var pRaw = document.getElementById('d_potenzaMotore').value.trim();
+    if(!pRaw){
+      return { elId:'d_potenzaMotore', message:'Inserisci la potenza motore totale installata (necessaria per calcolare gli estintori).' };
+    }
+    var pNum = parseItNum(pRaw);
+    if(isNaN(pNum) || pNum < 0){
+      return { elId:'d_potenzaMotore', message:'La potenza motore inserita non è valida.' };
+    }
+  }
+
+  if(categoria === 'diporto_puro'){
+    var acqueInterne = !!document.querySelector('input[name=dAcqueInterne]:checked');
+    if(!acqueInterne){
+      var dRaw = document.getElementById('d_distanza').value.trim();
+      if(!dRaw){
+        return { elId:'d_distanza', message:'Inserisci la distanza dalla costa, oppure seleziona "Sì, acque interne".' };
+      }
+      var dNum = parseItNum(dRaw);
+      if(isNaN(dNum) || dNum < 0){
+        return { elId:'d_distanza', message:'La distanza dalla costa inserita non è valida.' };
+      }
+    }
+  } else if(categoria === 'noleggio' && tipoUnita !== 'Nave'){
+    var autolimitazione = document.querySelector('input[name=dAutolimitazione]:checked');
+    autolimitazione = autolimitazione ? autolimitazione.value : 'no';
+    if(autolimitazione === 'si'){
+      if(!document.querySelector('input[name=dLimiteDichiarato]:checked')){
+        return { elId:'dLimiteDichiaratoGroup', message:'Seleziona il limite dichiarato nella dichiarazione di autolimitazione.' };
+      }
+    } else {
+      if(tipoUnita === 'Imbarcazione' && marcaturaCE === 'no' && !document.querySelector('input[name=dLicenza]:checked')){
+        return { elId:'dLicenzaGroup', message:'Indica cosa riporta la licenza di navigazione (entro le 12 miglia o senza alcun limite).' };
+      }
+      if(tipoUnita === 'Natante' && !document.querySelector('input[name=dNatanteIscritto]:checked')){
+        return { elId:'dNatanteIscrittoGroup', message:'Indica se il natante risulta iscritto all\'archivio/registro.' };
+      }
+    }
+  }
+
+  return null;
+}
+
+document.getElementById('verificaDotazioniBtn').addEventListener('click', function(){
+  var invalid = dotValidate();
+  if(invalid){
+    dotShowValidationError(invalid.elId, invalid.message);
+    return;
+  }
+  dotClearValidation();
+
+  var categoria = document.getElementById('d_categoria').value;
+  var tipoUnita = document.querySelector('input[name=dTipoUnita]:checked');
+  tipoUnita = tipoUnita ? tipoUnita.value : 'Imbarcazione';
+  var andatura = document.querySelector('input[name=dAndatura]:checked');
+  andatura = andatura ? andatura.value : 'Motore';
+
+  var colV, colVbis, mandatoryList, recommendedList, mandatoryTitle, recommendedTitle,
+      noteMaps, generalNotesArr, generalNotesTitle,
+      sarEquivalenzaApplicata = false, noleggioCallout = null, acqueInterne = false;
+
+  if(categoria === 'noleggio'){
+    if(tipoUnita === 'Nave'){
+      colV = 'navi';
+      colVbis = null; // l'Allegato VIII-bis non si applica alle Navi (solo imbarcazioni e natanti)
+      acqueInterne = false;
+      noleggioCallout = 'Unità di tipo Nave: dotazioni individuate direttamente dalla colonna "Navi" dell\'Allegato VIII, indipendentemente da limiti di navigazione o autolimitazione.';
+      mandatoryList = ALLEGATO_VIII_MAIN.slice();
+      recommendedList = [];
+    } else {
+      var res = dotResolveNoleggioColumn();
+      if(!res.colV){
+        alert(res.desc);
+        return;
+      }
+      colV = res.colV;
+      acqueInterne = colV === 'acque_interne';
+      colVbis = dotColVToVbisColumn(colV);
+      noleggioCallout = res.desc;
+
+      mandatoryList = ALLEGATO_VIII_MAIN.slice();
+      if(andatura === 'Vela') mandatoryList = mandatoryList.concat(ALLEGATO_VIII_VELA);
+      recommendedList = ALLEGATO_VBIS_MAIN.slice();
+      if(andatura === 'Vela') recommendedList = recommendedList.concat(ALLEGATO_VBIS_VELA);
+    }
+
+    mandatoryTitle = 'Dotazioni obbligatorie — Allegato VIII';
+    recommendedTitle = 'Dotazioni raccomandate — Allegato VIII-bis';
+    noteMaps = { letter: DOT_NOTE_LETTER_VIII, num: DOT_NOTE_NUM_VIII };
+    generalNotesArr = DOT_GENERAL_NOTES_VIII;
+    generalNotesTitle = 'Note generali ed esenzioni (Allegato VIII)';
+  } else {
+    acqueInterne = !!document.querySelector('input[name=dAcqueInterne]:checked');
+
+    var distanzaRaw = parseItNum(document.getElementById('d_distanza').value);
+    var unita = document.getElementById('d_distanzaUnita').value;
+    if(!acqueInterne && (isNaN(distanzaRaw) || distanzaRaw < 0)){
+      alert('Inserisci una distanza dalla costa valida (oppure seleziona "Acque interne").');
+      return;
+    }
+    var nm = 0;
+    if(!acqueInterne){
+      nm = unita === 'metri' ? (distanzaRaw / 1852) : distanzaRaw;
+    }
+
+    var rawColV = dotDistanceToColumnV(nm, acqueInterne);
+    colVbis = dotDistanceToColumnVbis(nm, acqueInterne);
+
+    // Art. 54, comma 1, D.M. 146/2008: equivalenza per navigazione oltre le 12 miglia
+    // ma entro l'area SAR nazionale, con strumenti di geo-localizzazione a bordo.
+    var sarApplicabile = !acqueInterne && nm > 12;
+    var sarChecked = sarApplicabile && document.getElementById('d_sarNazionale').checked;
+    var geoChecked = sarApplicabile && document.getElementById('d_geoLocalizzazione').checked;
+    sarEquivalenzaApplicata = sarApplicabile && sarChecked && geoChecked;
+    colV = sarEquivalenzaApplicata ? '12mi' : rawColV;
+
+    mandatoryList = ALLEGATO_V_MAIN.slice();
+    if(andatura === 'Vela') mandatoryList = mandatoryList.concat(ALLEGATO_V_VELA);
+    recommendedList = ALLEGATO_VBIS_MAIN.slice();
+    if(andatura === 'Vela') recommendedList = recommendedList.concat(ALLEGATO_VBIS_VELA);
+
+    mandatoryTitle = 'Dotazioni obbligatorie — Allegato V';
+    recommendedTitle = 'Dotazioni raccomandate — Allegato V-bis';
+    noteMaps = { letter: DOT_NOTE_LETTER, num: DOT_NOTE_NUM };
+    generalNotesArr = DOT_GENERAL_NOTES;
+    generalNotesTitle = 'Note generali ed esenzioni (Allegato V)';
+  }
+
+  var mandatoryItems = dotBuildItemsForColumn(mandatoryList, colV);
+  var recommendedItems = colVbis ? dotBuildItemsForColumn(recommendedList, colVbis) : [];
+
+  // Art. 54, comma 3, D.M. 146/2008: unità pneumatiche CE (cat. A/B/C, UNI EN ISO 6185 parti 3-4)
+  // esentate dalla zattera autogonfiabile entro le 12 miglia, con obbligo del kit di sopravvivenza sostitutivo.
+  // (equivalenza specifica del diporto puro: non applicata alla categoria Noleggio)
+  var marcaturaCE = document.querySelector('input[name=dMarcaturaCE]:checked');
+  marcaturaCE = marcaturaCE ? marcaturaCE.value : 'si';
+  var pneumaticaEsente = categoria !== 'noleggio' && document.getElementById('d_pneumaticaEsente').checked;
+  var esenzioneZatteraApplicata = pneumaticaEsente && colV === '12mi';
+  if(esenzioneZatteraApplicata){
+    mandatoryItems = mandatoryItems.filter(function(it){
+      return it.name.indexOf('Zattera di salvataggio') !== 0;
+    });
+    mandatoryItems.push({
+      name: 'Kit di sopravvivenza previsto per il mezzo collettivo di salvataggio sostituito',
+      suffix: 'in luogo della zattera, in virtù dell\'esenzione',
+      qty: 'x',
+      note: null,
+      numNotes: []
+    });
+  }
+
+  var colLabel = DOT_COLS_V.filter(function(c){ return c.key === colV; })[0];
+  colLabel = colLabel ? colLabel.label : colV;
+
+  // Filtro per lunghezza fuori tutto (LFT): alcune dotazioni sono previste solo oltre una certa lunghezza.
+  // Non pertinente per le Navi (campo nascosto in quel caso).
+  var lftRaw = tipoUnita === 'Nave' ? NaN : parseItNum(document.getElementById('d_lft').value);
+  var lftUnita = document.getElementById('d_lftUnita').value;
+  var lftM = null;
+  if(!isNaN(lftRaw) && lftRaw >= 0){
+    lftM = lftUnita === 'ft' ? lftRaw * 0.3048 : lftRaw;
+    mandatoryItems = mandatoryItems.filter(function(it){
+      if(it.name === 'Pallone nero di fonda') return lftM > 7;
+      if(it.name === 'Fischio e campana') return lftM > 12;
+      return true;
+    });
+  }
+
+  var html = '';
+  html += '<div class="dot-callout">Fascia individuata: <strong>' + dotEscapeHtml(colLabel) + '</strong> — ' +
+    dotEscapeHtml(tipoUnita) + ', ' + dotEscapeHtml(andatura) +
+    (categoria === 'noleggio' ? ', categoria Noleggio' : ', categoria Diporto Puro') + '.</div>';
+
+  if(noleggioCallout){
+    html += '<div class="dot-callout">' + dotEscapeHtml(noleggioCallout) + '</div>';
+  }
+  if(sarEquivalenzaApplicata){
+    html += '<div class="dot-callout">Equivalenza applicata (art. 54, comma 1, D.M. 146/2008): navigazione oltre le 12 miglia ma entro l\'area SAR nazionale, con strumenti di geo-localizzazione a bordo — le dotazioni obbligatorie sono quelle previste per la navigazione entro le 12 miglia dalla costa.</div>';
+  }
+  if(esenzioneZatteraApplicata){
+    html += '<div class="dot-callout">Esenzione applicata (art. 54, comma 3, D.M. 146/2008): unità pneumatica CE esentata dalla zattera autogonfiabile entro le 12 miglia, sostituita dal kit di sopravvivenza obbligatorio.</div>';
+  }
+  var passeggeriRaw = parseItNum(document.getElementById('d_passeggeri').value);
+  var equipaggioRaw = parseItNum(document.getElementById('d_equipaggio').value);
+  var totalePersone = (isNaN(passeggeriRaw) ? 0 : passeggeriRaw) + (isNaN(equipaggioRaw) ? 0 : equipaggioRaw);
+  if(totalePersone > 0){
+    html += '<div class="dot-callout">I mezzi collettivi e individuali di salvataggio devono essere sufficienti per le <strong>' +
+      totalePersone + '</strong> persone dichiarate a bordo (' +
+      (isNaN(passeggeriRaw) ? 0 : passeggeriRaw) + ' passeggeri + ' + (isNaN(equipaggioRaw) ? 0 : equipaggioRaw) + ' equipaggio).</div>';
+  }
+  if(categoria === 'noleggio' && !isNaN(passeggeriRaw) && passeggeriRaw > 12){
+    html += '<div class="dot-callout" style="color:#a5361f; border-color:#e3b3a8; background:#fdf1ee;">Attenzione: per le unità adibite a noleggio il numero dei passeggeri (escluso equipaggio) non può superare le 12 unità (art. 88, D.M. 146/2008). Passeggeri dichiarati: <strong>' + passeggeriRaw + '</strong>.</div>';
+  }
+
+  // Art. 89, D.M. 146/2008: equipaggio minimo per unità adibite a noleggio
+  var equipaggioWarningEl = document.getElementById('dEquipaggioMinimoWarning');
+  equipaggioWarningEl.classList.add('hidden');
+  equipaggioWarningEl.textContent = '';
+  if(categoria === 'noleggio' && !isNaN(equipaggioRaw)){
+    var minEquipaggio = null;
+    if(tipoUnita === 'Nave'){
+      minEquipaggio = 3;
+    } else if(tipoUnita === 'Imbarcazione' && !isNaN(passeggeriRaw) && passeggeriRaw > 8 && lftM !== null && lftM > 18){
+      minEquipaggio = 2;
+    }
+    if(minEquipaggio !== null && equipaggioRaw < minEquipaggio){
+      var msg = 'Il numero di equipaggio dichiarato (' + equipaggioRaw + ') risulta inferiore al minimo richiesto (' + minEquipaggio + ') dall\'art. 89, D.M. 146/2008.';
+      equipaggioWarningEl.textContent = msg;
+      equipaggioWarningEl.classList.remove('hidden');
+      html += '<div class="dot-callout" style="color:#a5361f; border-color:#e3b3a8; background:#fdf1ee;">' + dotEscapeHtml(msg) + '</div>';
+    }
+  }
+
+  if(lftM !== null){
+    html += '<div class="dot-callout">Lunghezza fuori tutto (LFT) dichiarata: <strong>' + lftM.toFixed(2) + ' m</strong>' +
+      (lftUnita === 'ft' ? ' (da ' + lftRaw + ' piedi)' : '') +
+      ' — le dotazioni legate alla lunghezza dell\'unità sono filtrate di conseguenza.</div>';
+  }
+
+  html += '<div class="dot-result-section">';
+  html += '<div class="dot-result-title">' + dotEscapeHtml(mandatoryTitle) + '</div>';
+  html += '<div class="dot-result-sub">Mezzi di salvataggio e dotazioni di sicurezza minime da tenere a bordo. Spunta ogni voce durante il controllo a bordo.</div>';
+
+  var zatteraIdx = mandatoryItems.findIndex(function(it){ return it.name === 'Zattera di salvataggio costiera'; });
+  var battelloHtml = '';
+  if(categoria !== 'noleggio' && colV === '12mi' && zatteraIdx !== -1){
+    battelloHtml = '<div class="dot-item-wrap dot-item-alt">' +
+      '<div class="dot-item">' +
+        '<label class="dot-item-check" for="battelloPneumaticoToggle">' +
+          '<input type="checkbox" class="dot-checkbox" id="battelloPneumaticoToggle">' +
+          '<span class="dot-item-label">Battello pneumatico <span class="hint" style="display:inline">(in sostituzione della zattera — art. 54, comma 2, D.M. 146/2008)</span></span>' +
+        '</label>' +
+      '</div>' +
+      '<div class="dot-subchecklist hidden" id="battelloPneumaticoChecklist">';
+    ['Marcatura CE','Dispositivo di risalita a bordo','Kit di sopravvivenza','Capacità di imbarco pari alle persone presenti a bordo','Pronto all\'uso'].forEach(function(label, i){
+      battelloHtml += '<label class="dot-item-check dot-subitem" for="battelloSub_' + i + '">' +
+        '<input type="checkbox" class="dot-checkbox" id="battelloSub_' + i + '">' +
+        '<span>' + dotEscapeHtml(label) + '</span>' +
+      '</label>';
+    });
+    battelloHtml += '</div></div>';
+  }
+
+  var mandInjections = {};
+  if(battelloHtml) mandInjections['Zattera di salvataggio costiera'] = battelloHtml;
+  mandInjections['Cassetta di pronto soccorso'] = (tipoUnita === 'Nave')
+    ? dotBuildCassettaPSNaveNote()
+    : dotBuildCassettaPSChecklist();
+  html += dotRenderList(mandatoryItems, 'mand', mandInjections, null, noteMaps);
+  html += '</div>';
+
+
+  // --- Sezione Estintori (Allegato V, lett. E) ---
+  var marcaturaCE = document.querySelector('input[name=dMarcaturaCE]:checked');
+  marcaturaCE = marcaturaCE ? marcaturaCE.value : 'si';
+  var showEstintoriNotes = false;
+
+  html += '<div class="dot-result-section">';
+  html += '<div class="dot-result-title">Estintori — Allegato V, lett. E</div>';
+
+  if(marcaturaCE === 'si'){
+    html += '<div class="dot-result-sub">Unità con marcatura CE.</div>';
+    html += '<div class="dot-empty">Il numero e il tipo di estintori sono individuati dal manuale del proprietario dell\'unità.</div>';
+    if(document.getElementById('d_pneumaticaEsente').checked){
+      html += '<div class="dot-callout">Trattandosi di unità pneumatica esentata dalla zattera autogonfiabile entro le 12 miglia, è comunque richiesto <strong>un estintore aggiuntivo</strong> rispetto a quanto indicato nel manuale del proprietario.</div>';
+    }
+  } else {
+    var potenzaRaw = parseItNum(document.getElementById('d_potenzaMotore').value);
+    var potenzaUnita = document.getElementById('d_potenzaUnita').value;
+    if(isNaN(potenzaRaw) || potenzaRaw < 0){
+      html += '<div class="dot-empty">Inserisci la potenza motore totale installata per calcolare numero, collocazione e capacità estinguente degli estintori richiesti.</div>';
+    } else {
+      var kw = dotKw(potenzaRaw, potenzaUnita);
+      html += '<div class="dot-result-sub">Unità non marcata CE — potenza motore totale: <strong>' + kw.toFixed(1) + ' kW</strong>' +
+        (potenzaUnita !== 'kw' ? ' (da ' + potenzaRaw + ' ' + potenzaUnita.toUpperCase() + ')' : '') + '.</div>';
+      showEstintoriNotes = true;
+
+      if(tipoUnita === 'Natante'){
+        var natEst = dotEstintoriNatante(kw);
+        natEst.forEach(function(e, idx){
+          html += dotRenderCustomRow(e.loc, null, e.qty + ' da ' + e.cap, [], 'est_nat_' + idx);
+        });
+      } else {
+        var imbEst = dotEstintoriImbarcazione(kw);
+        if(!imbEst.plancia){
+          html += '<div class="dot-empty">Nessun estintore specificamente richiesto per questa fascia di potenza (P ≤ 18,4 kW).</div>';
+        } else {
+          html += dotRenderCustomRow('In plancia o posto guida', null, dotFmtQtyCap(imbEst.plancia), [], 'est_plancia');
+
+          var fissoQty = kw <= 294 ? '1 da 13 B' : '1 da 21 B';
+          var nonFissoQty = dotFmtQtyCap(imbEst.motore);
+          html += '<div class="dot-item-wrap">' +
+            '<div class="dot-item">' +
+              '<span class="dot-item-label">In prossimità dell\'apparato motore ' +
+                '<button type="button" class="dot-note-tag" data-target="ndetail_est_motore_1">1</button>' +
+              '</span>' +
+            '</div>' +
+            '<div class="dot-note-details">' +
+              dotNoteDetailHtml('est_motore_1', '1', 'Se il vano motore è provvisto di impianto fisso antincendio: fino a 294 kW, 1 da 13 B; oltre 294 kW, 1 da 21 B.', false) +
+            '</div>' +
+            '<div class="dot-subchecklist" id="motoreScelteBlock">' +
+              '<div class="dot-item dot-subitem">' +
+                '<label class="dot-item-check" for="motoreFissoCk">' +
+                  '<input type="checkbox" class="dot-checkbox" id="motoreFissoCk">' +
+                  '<span>Vano motore provvisto di impianto fisso antincendio</span>' +
+                '</label>' +
+                '<span class="dot-item-qty">' + dotEscapeHtml(fissoQty) + '</span>' +
+              '</div>' +
+              '<div class="dot-item dot-subitem">' +
+                '<label class="dot-item-check" for="motoreNonFissoCk">' +
+                  '<input type="checkbox" class="dot-checkbox" id="motoreNonFissoCk">' +
+                  '<span>Vano motore NON provvisto di impianto fisso antincendio</span>' +
+                '</label>' +
+                '<span class="dot-item-qty">' + dotEscapeHtml(nonFissoQty) + '</span>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
+
+          html += dotRenderCustomRow('In ciascuno degli altri locali o gruppi di locali adiacenti', null, dotFmtQtyCap(imbEst.altriLocali), [], 'est_altri');
+        }
+      }
+    }
+  }
+  html += '</div>';
+
+  if(showEstintoriNotes){
+    html += '<div class="dot-notes-toggle"><button class="link-btn" id="dotEstintoriNotesToggleBtn">Note sugli estintori (Allegato V, lett. E) ▾</button></div>';
+    html += '<div class="dot-notes-panel hidden" id="dotEstintoriNotesPanel"><ul>';
+    DOT_ESTINTORI_NOTES.forEach(function(n){ html += '<li>' + dotEscapeHtml(n) + '</li>'; });
+    html += '</ul></div>';
+  }
+
+  html += '<div class="dot-result-section">';
+  html += '<div class="dot-result-title">' + dotEscapeHtml(recommendedTitle) + '</div>';
+  html += '<div class="dot-result-sub">Dotazioni facoltative, non obbligatorie per legge. Spunta ogni voce durante il controllo a bordo.</div>';
+  if(colVbis === null){
+    html += '<div class="dot-empty">Non sono definite raccomandazioni specifiche per questa fascia (es. "Acque interne" o entro le 6 miglia): nessuna voce applicabile.</div>';
+  } else {
+    html += dotRenderList(recommendedItems, 'rec', null, null, noteMaps);
+  }
+  html += '</div>';
+
+  html += '<div class="dot-notes-toggle"><button class="link-btn" id="dotGeneralNotesToggleBtn">' + dotEscapeHtml(generalNotesTitle) + ' ▾</button></div>';
+  html += '<div class="dot-notes-panel hidden" id="dotGeneralNotesPanel"><ul>';
+  generalNotesArr.forEach(function(n){ html += '<li>' + dotEscapeHtml(n) + '</li>'; });
+  html += '</ul></div>';
+
+  html += '<div class="dot-notes-toggle"><button class="link-btn" id="dotLinkNormeToggleBtn">Testi normativi ufficiali ▾</button></div>';
+  html += '<div class="dot-notes-panel hidden" id="dotLinkNormePanel">' +
+    '<div style="margin-bottom:6px;"><a href="' + LINK_DM_146_2008_MULTIVIGENTE + '" target="_blank" rel="noopener">Normattiva - DM 146/2008 ↗</a></div>' +
+    '<div><a href="' + LINK_DM_10_03_2022 + '" target="_blank" rel="noopener">G.U. - DM 10.03.2022 ↗</a></div>' +
+  '</div>';
+
+  document.getElementById('dotazioniResult').innerHTML = html;
+
+  dotWireChecklist(document.getElementById('dotazioniResult'));
+
+  var cassettaPSToggle = document.getElementById('cassettaPSToggle');
+  if(cassettaPSToggle){
+    cassettaPSToggle.addEventListener('change', function(){
+      var sub = document.getElementById('cassettaPSChecklist');
+      sub.classList.toggle('hidden', !cassettaPSToggle.checked);
+      var row = cassettaPSToggle.closest('.dot-item');
+      if(row) row.classList.toggle('dot-checked', cassettaPSToggle.checked);
+    });
+  }
+
+  var battelloToggle = document.getElementById('battelloPneumaticoToggle');
+  var zatteraCheckbox = zatteraIdx !== -1 ? document.getElementById('chk_mand_' + zatteraIdx) : null;
+  if(battelloToggle){
+    battelloToggle.addEventListener('change', function(){
+      var sub = document.getElementById('battelloPneumaticoChecklist');
+      sub.classList.toggle('hidden', !battelloToggle.checked);
+      var row = battelloToggle.closest('.dot-item');
+      if(row) row.classList.toggle('dot-checked', battelloToggle.checked);
+      if(battelloToggle.checked && zatteraCheckbox && zatteraCheckbox.checked){
+        zatteraCheckbox.checked = false;
+        zatteraCheckbox.dispatchEvent(new Event('change', {bubbles:true}));
+      }
+    });
+  }
+  if(zatteraCheckbox && battelloToggle){
+    zatteraCheckbox.addEventListener('change', function(){
+      if(zatteraCheckbox.checked && battelloToggle.checked){
+        battelloToggle.checked = false;
+        battelloToggle.dispatchEvent(new Event('change', {bubbles:true}));
+      }
+    });
+  }
+
+  function dotWireMutualExclusive(idA, idB){
+    var a = document.getElementById(idA), b = document.getElementById(idB);
+    if(!a || !b) return;
+    a.addEventListener('change', function(){ if(a.checked && b.checked){ b.checked = false; b.dispatchEvent(new Event('change', {bubbles:true})); } });
+    b.addEventListener('change', function(){ if(b.checked && a.checked){ a.checked = false; a.dispatchEvent(new Event('change', {bubbles:true})); } });
+  }
+  dotWireMutualExclusive('motoreFissoCk', 'motoreNonFissoCk');
+
+  var estintoriNotesBtn = document.getElementById('dotEstintoriNotesToggleBtn');
+  if(estintoriNotesBtn){
+    estintoriNotesBtn.addEventListener('click', function(){
+      var panel = document.getElementById('dotEstintoriNotesPanel');
+      panel.classList.toggle('hidden');
+      estintoriNotesBtn.textContent = panel.classList.contains('hidden') ? 'Note sugli estintori (Allegato V, lett. E) ▾' : 'Nascondi note sugli estintori ▴';
+    });
+  }
+  document.getElementById('dotGeneralNotesToggleBtn').addEventListener('click', function(){
+    var panel = document.getElementById('dotGeneralNotesPanel');
+    panel.classList.toggle('hidden');
+    this.textContent = panel.classList.contains('hidden') ? (generalNotesTitle + ' ▾') : 'Nascondi note generali ed esenzioni ▴';
+  });
+
+  document.getElementById('dotLinkNormeToggleBtn').addEventListener('click', function(){
+    var panel = document.getElementById('dotLinkNormePanel');
+    panel.classList.toggle('hidden');
+    this.textContent = panel.classList.contains('hidden') ? 'Testi normativi ufficiali ▾' : 'Nascondi testi normativi ufficiali ▴';
+  });
+
+  document.getElementById('dotazioniResult').scrollIntoView({behavior:'smooth', block:'start'});
+});
+
+wireToggleGroup('dTipoUnitaGroup', function(){ updateTipoUnitaFieldsVisibility(); updateNoleggioVisibility(); });
+wireToggleGroup('dAndaturaGroup', function(){});
+wireToggleGroup('dMarcaturaCEGroup', function(val){
+  var ceFields = document.getElementById('dCeFields');
+  var nonCeFields = document.getElementById('dNonCeFields');
+  if(val === 'no'){
+    ceFields.classList.add('hidden');
+    nonCeFields.classList.remove('hidden');
+  } else {
+    ceFields.classList.remove('hidden');
+    nonCeFields.classList.add('hidden');
+  }
+  updateNoleggioVisibility();
+});
+wireToggleGroup('dAcqueInterneGroup', function(val){
+  var distField = document.getElementById('dDistanzaField');
+  if(val === 'si'){ distField.classList.add('hidden'); }
+  else { distField.classList.remove('hidden'); }
+  updateDSarGeoVisibility();
+  updatePneumaticaEsenteVisibility();
+});
+
+function updateDSarGeoVisibility(){
+  var sarGeoBlock = document.getElementById('dSarGeoBlock');
+  var acqueInterne = !!document.querySelector('input[name=dAcqueInterne]:checked');
+  if(acqueInterne){ sarGeoBlock.classList.add('hidden'); return; }
+  var distanzaRaw = parseItNum(document.getElementById('d_distanza').value);
+  var unita = document.getElementById('d_distanzaUnita').value;
+  if(isNaN(distanzaRaw)){ sarGeoBlock.classList.add('hidden'); return; }
+  var nm = unita === 'metri' ? (distanzaRaw / 1852) : distanzaRaw;
+  if(nm > 12){ sarGeoBlock.classList.remove('hidden'); }
+  else { sarGeoBlock.classList.add('hidden'); }
+}
+document.getElementById('d_distanza').addEventListener('input', updateDSarGeoVisibility);
+document.getElementById('d_distanzaUnita').addEventListener('change', updateDSarGeoVisibility);
+
+/* L'esenzione zattera per unità pneumatiche (art. 54, comma 2-3, D.M. 146/2008) dipende
+   dalla distanza dalla costa (entro le 12 miglia), non dalla marcatura CE: è quindi mostrata
+   nella card "Distanza dalla costa" e resta disponibile indipendentemente dalla marcatura CE. */
+function updatePneumaticaEsenteVisibility(){
+  var block = document.getElementById('dPneumaticaEsenteBlock');
+  var categoria = document.getElementById('d_categoria').value;
+  var checkbox = document.getElementById('d_pneumaticaEsente');
+  if(categoria === 'noleggio'){
+    block.classList.add('hidden');
+    checkbox.checked = false;
+    return;
+  }
+  // La "zattera di salvataggio costiera" (unico mezzo collettivo da cui ci si può esentare in
+  // questo scenario) è prevista dall'Allegato V solo nella fascia "Entro 12 miglia": non è
+  // richiesta né in acque interne né entro le 6 miglia, quindi l'esenzione non ha senso lì.
+  var acqueInterne = !!document.querySelector('input[name=dAcqueInterne]:checked');
+  if(acqueInterne){ block.classList.add('hidden'); checkbox.checked = false; return; }
+  var distanzaRaw = parseItNum(document.getElementById('d_distanza').value);
+  var unita = document.getElementById('d_distanzaUnita').value;
+  if(isNaN(distanzaRaw)){ block.classList.add('hidden'); checkbox.checked = false; return; }
+  var nm = unita === 'metri' ? (distanzaRaw / 1852) : distanzaRaw;
+  if(nm > 6 && nm <= 12){
+    block.classList.remove('hidden');
+  } else {
+    block.classList.add('hidden');
+    checkbox.checked = false;
+  }
+}
+document.getElementById('d_distanza').addEventListener('input', updatePneumaticaEsenteVisibility);
+document.getElementById('d_distanzaUnita').addEventListener('change', updatePneumaticaEsenteVisibility);
+
+/* ---------------- Categoria d'uso: Diporto Puro / Noleggio ---------------- */
+var DOT_COL_LABELS = { acque_interne:'Acque interne', '3mi':'Entro 3 miglia', '6mi':'Entro 6 miglia',
+  '12mi':'Entro 12 miglia', '50mi':'Entro 50 miglia', senza_limite:'Senza limite' };
+
+function updateCategoriaVisibility(){
+  var categoria = document.getElementById('d_categoria').value;
+  var noleggioSection = document.getElementById('dNoleggioSection');
+  var distanzaSection = document.getElementById('dDistanzaSection');
+  var naveOpt = document.getElementById('dTipoNaveOpt');
+  var passeggeriHint = document.getElementById('dNoleggioPasseggeriHint');
+
+  if(categoria === 'noleggio'){
+    noleggioSection.classList.remove('hidden');
+    distanzaSection.classList.add('hidden');
+    naveOpt.classList.remove('hidden');
+    passeggeriHint.classList.remove('hidden');
+  } else {
+    noleggioSection.classList.add('hidden');
+    distanzaSection.classList.remove('hidden');
+    naveOpt.classList.add('hidden');
+    passeggeriHint.classList.add('hidden');
+    // Se si torna a Diporto Puro mentre "Nave" era selezionata, si riporta su Imbarcazione (Diporto Puro non prevede Navi)
+    if(document.querySelector('input[name=dTipoUnita]:checked').value === 'Nave'){
+      naveOpt.classList.remove('active');
+      naveOpt.querySelector('input').checked = false;
+      var imbOpt = document.querySelector('#dTipoUnitaGroup .toggle-opt[data-val=Imbarcazione]');
+      imbOpt.classList.add('active');
+      imbOpt.querySelector('input').checked = true;
+    }
+  }
+  updateTipoUnitaFieldsVisibility();
+  updateNoleggioVisibility();
+  updatePneumaticaEsenteVisibility();
+}
+document.getElementById('d_categoria').addEventListener('change', updateCategoriaVisibility);
+
+function updateTipoUnitaFieldsVisibility(){
+  var tipoUnita = document.querySelector('input[name=dTipoUnita]:checked');
+  tipoUnita = tipoUnita ? tipoUnita.value : 'Imbarcazione';
+  var isNave = tipoUnita === 'Nave';
+  document.getElementById('dLftField').classList.toggle('hidden', isNave);
+  document.getElementById('dAndaturaField').classList.toggle('hidden', isNave);
+  document.getElementById('dNoleggioSection').classList.toggle('hidden',
+    isNave || document.getElementById('d_categoria').value !== 'noleggio');
+}
+
+wireToggleGroup('dAutolimitazioneGroup', function(){ updateNoleggioVisibility(); });
+wireToggleGroup('dLimiteDichiaratoGroup', function(){ updateNoleggioVisibility(); });
+wireToggleGroup('dLicenzaGroup', function(){ updateNoleggioVisibility(); });
+wireToggleGroup('dNatanteIscrittoGroup', function(){ updateNoleggioVisibility(); });
+
+/* Determina la colonna (Allegato VIII / VIII-bis) applicabile in base allo scenario di noleggio */
+function dotResolveNoleggioColumn(){
+  var autolimitazione = document.querySelector('input[name=dAutolimitazione]:checked');
+  autolimitazione = autolimitazione ? autolimitazione.value : 'no';
+  var tipoUnita = document.querySelector('input[name=dTipoUnita]:checked');
+  tipoUnita = tipoUnita ? tipoUnita.value : 'Imbarcazione';
+  var marcaturaCE = document.querySelector('input[name=dMarcaturaCE]:checked');
+  marcaturaCE = marcaturaCE ? marcaturaCE.value : 'si';
+
+  if(autolimitazione === 'si'){
+    var limite = document.querySelector('input[name=dLimiteDichiarato]:checked');
+    if(!limite) return { colV:null, desc:'Seleziona il limite dichiarato.' };
+    var colV = limite.value;
+    return {
+      colV: colV,
+      desc: 'Dichiarazione di autolimitazione presente: dotazioni previste per "' + (DOT_COL_LABELS[colV] || colV) + '" (art. 88, comma 2, D.M. 146/2008).'
+    };
+  }
+
+  // Nessuna autolimitazione
+  if(tipoUnita === 'Imbarcazione'){
+    if(marcaturaCE === 'si'){
+      return { colV:'senza_limite', desc:'Imbarcazione marcata CE, nessuna autolimitazione: dotazioni per navigazione senza limite.' };
+    }
+    var licenza = document.querySelector('input[name=dLicenza]:checked');
+    if(!licenza) return { colV:null, desc:'Imbarcazione non marcata CE: indica cosa riporta la licenza di navigazione.' };
+    return {
+      colV: licenza.value,
+      desc: 'Imbarcazione non marcata CE, licenza di navigazione "' + (licenza.value === 'senza_limite' ? 'senza alcun limite' : 'entro le 12 miglia') + '".'
+    };
+  } else {
+    var iscritto = document.querySelector('input[name=dNatanteIscritto]:checked');
+    if(!iscritto) return { colV:null, desc:'Natante: indica se risulta iscritto all\'archivio/registro.' };
+    var colV2 = iscritto.value === 'si' ? 'senza_limite' : '12mi';
+    return {
+      colV: colV2,
+      desc: 'Natante ' + (iscritto.value === 'si' ? 'iscritto' : 'non iscritto') + ': dotazioni per "' + DOT_COL_LABELS[colV2] + '".'
+    };
+  }
+}
+
+function updateNoleggioVisibility(){
+  var categoria = document.getElementById('d_categoria').value;
+  if(categoria !== 'noleggio') return;
+
+  var autolimitazione = document.querySelector('input[name=dAutolimitazione]:checked');
+  autolimitazione = autolimitazione ? autolimitazione.value : 'no';
+  var tipoUnita = document.querySelector('input[name=dTipoUnita]:checked');
+  tipoUnita = tipoUnita ? tipoUnita.value : 'Imbarcazione';
+  var marcaturaCE = document.querySelector('input[name=dMarcaturaCE]:checked');
+  marcaturaCE = marcaturaCE ? marcaturaCE.value : 'si';
+
+  document.getElementById('dLimiteDichiaratoField').classList.toggle('hidden', autolimitazione !== 'si');
+  document.getElementById('dImbarcazioneLicenzaField').classList.toggle('hidden',
+    !(autolimitazione === 'no' && tipoUnita === 'Imbarcazione' && marcaturaCE === 'no'));
+  document.getElementById('dNatanteIscrittoField').classList.toggle('hidden',
+    !(autolimitazione === 'no' && tipoUnita === 'Natante'));
+
+  var res = dotResolveNoleggioColumn();
+  document.getElementById('dNoleggioEsito').textContent = res.desc;
+}
+updateCategoriaVisibility();
 
 })();
 
